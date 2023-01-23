@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <title>Import File</title>
+</head>
+<body>
+    <div class="listing">
+        <h1>Upload your CSV file</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+          <p><input type="file" name="file" class="button"></p>
+            {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+            {% endfor %}
+          <p><input type="submit" value="Submit" class="button"></p>
+        </form>
+    </div>
+</body>
+</html>

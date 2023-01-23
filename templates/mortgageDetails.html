@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+        <title>Capstone Demo</title>
+    </head>
+    <body>
+        <a href="{{url_for('index')}}">Return to File Upload</a>
+        <h1>Mortgage Details</h1>
+        <div class="listing">
+            <h2>{{data[0]}}</h2>
+            <h3>{{data[1]}}</h3>
+            <span>
+                <div class="item">
+                    <h4>Asset Type</h4>
+                    <p>{{data[2]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Unpaid Principal Balance</h4>
+                        <p>{{data[3]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Loan Term</h4>
+                        <p>{{data[4]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Note Rate</h4>
+                        <p>{{data[5]}}</p>
+                </div>
+                <div class="item" id="ppp">
+                    <h4>Price Point Predictor</h4>
+                    <a href="#"><p>{{ppp}}</p></a>
+                </div>
+            </span>
+            <span>
+                <div class="item">
+                        <h4>Appraised Value</h4>
+                        <p>{{data[7]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Loan-To-Value</h4>
+                        <p>{{data[8]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Property Type</h4>
+                        <p>{{data[9]}}</p>
+                </div>
+                <div class="item">
+                        <h4>Occupancy Status</h4>
+                        <p>{{data[10]}}</p>
+                </div>
+            </span>
+        </div>
+    </body>
+</html>

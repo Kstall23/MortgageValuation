@@ -1,0 +1,56 @@
+body{
+   font-family: Arial;
+    color: #005458;
+    background-color: #f0f7f7;
+    width: 70%;
+    margin: auto;
+}
+
+.button{
+    background-color: #005458;
+    color: white;
+}
+
+h2{
+    padding-left: 10px;
+    margin: 10px;
+}
+
+h3,h4{
+    opacity: 70%;
+    padding-left: 10px;
+    margin: 10px;
+}
+
+h4{
+    font-size: 14px;
+}
+
+p{
+    color: black;
+    padding-left: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+span{
+    display: flex;
+}
+
+.item{
+    display: block;
+    margin-right: 20px;
+}
+
+.listing{
+    margin: 20px 0px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #005458;
+    padding: 20px;
+}
+
+#ppp{
+    border-radius: 10px;
+    border: 1px solid #93e6b2;
+}
