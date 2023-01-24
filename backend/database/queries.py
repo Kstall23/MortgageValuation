@@ -1,0 +1,1 @@
+print("I really don't know what this folder or file will end up looking like, but I think we will need some organization of methods to call the database with in order to read and write to it")
