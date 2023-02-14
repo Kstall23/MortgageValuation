@@ -1,11 +1,12 @@
-import os
-
+import os, re
 from flask import Flask, redirect, url_for, request, render_template, flash
 import pandas as pd
+import urllib.request, json
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.secret_key = "super secret key"
+TEST_API_URL = "https://api.coindesk.com/v1/bpi/currentprice.json"
 
 @app.route('/')
 def index():
@@ -28,7 +29,9 @@ def mortageDetails(file_name):
     file_path = "static/files/" + file_name
     df = pd.read_csv(file_path)
     data = df.values[0]
-    return render_template('mortgageDetails.html', data=data, ppp="$200,000,000")
+    price_response = urllib.request.urlopen(TEST_API_URL).read()
+    ppp = json.loads(price_response)['bpi']['USD']['rate']
+    return render_template('mortgageDetails.html', data=data, ppp=ppp)
 
 if __name__ == '__main__':
     app.run(debug=True)
