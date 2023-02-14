@@ -2,9 +2,11 @@
 Capstone Project for Montana State Software Factory
 
 # DEMO
--On first download, create and activate virtual environment by running:
+-Create and activate virtual environment by running:
 ```
-python3 -m venv env & source ./env/bin/activate
+python3 -m venv env
+
+source ./env/bin/activate
 ```
 
 -Install flask by running:
@@ -12,7 +14,12 @@ python3 -m venv env & source ./env/bin/activate
 pip install Flask
 ```
 
--Run index.py and click on web address in terminal
+-Run index.py:
+```
+python3 frontend/index.py
+```
+
+-Navigate to http://127.0.0.1:5000
 
 -Upload practice csv files from static folder
 
