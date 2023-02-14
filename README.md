@@ -12,7 +12,7 @@ python3 -m venv env & source ./env/bin/activate
 pip install Flask
 ```
 
-
 -Run index.py and click on web address in terminal
 
 -Upload practice csv files from static folder
+
