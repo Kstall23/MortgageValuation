@@ -3,17 +3,43 @@ body{
     color: #005458;
     background-color: #f0f7f7;
     width: 70%;
-    margin: auto;
+    margin: 50px auto;
 }
 
 .button{
     background-color: #005458;
     color: white;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    text-decoration: none;
 }
 
-h2{
+.button:hover{
+    background-color: #93e6b2;
+    color: #005458;
+}
+
+#file:hover{
+    background-color: #005458;
+    color: white;
+}
+
+.submit{
+    padding: 16px 32px;
+    margin: 4px 2px;
+}
+
+.return{
+    padding: 16px 32px;
+    margin: 40px 0px;
+    max-width: 20%;
+}
+
+h1, h2{
     padding-left: 10px;
-    margin: 10px;
+    margin: 30px 0px;
 }
 
 h3,h4{
@@ -26,11 +52,17 @@ h4{
     font-size: 14px;
 }
 
-p{
+a, p{
     color: black;
     padding-left: 10px;
     margin: 10px;
     font-size: 16px;
+}
+
+a{
+    display: inline;
+    margin: 5px;
+    padding: 0px;
 }
 
 span{
@@ -53,4 +85,14 @@ span{
 #ppp{
     border-radius: 10px;
     border: 1px solid #93e6b2;
+}
+
+.delete{
+    text-decoration: none;
+    display: inline;
+}
+
+.historyLine{
+    display: block;
+    margin-bottom: 10px;
 }

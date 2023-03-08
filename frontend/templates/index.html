@@ -9,11 +9,22 @@
     <div class="listing">
         <h1>Upload your CSV file</h1>
         <form method="POST" action="" enctype="multipart/form-data">
-          <p><input type="file" name="file" class="button"></p>
+          <p><input type="file" name="file" class="button" id="file"></p>
             {% for message in get_flashed_messages() %}
                 <p>{{ message }}</p>
             {% endfor %}
-          <p><input type="submit" value="Submit" class="button"></p>
+          <p><input type="submit" value="Submit" class="button submit")></p>
+        </form>
+    </div>
+
+    <div class="listing">
+        <h1>Upload History</h1>
+            {% for file in filenames %}
+                <div class="historyLine">
+                    <a href="{{url_for('delete_file', file_name=file)}}" class="delete"> x </a>
+                    <a href="{{url_for('mortgageDetails', file_name=file)}}">{{ file }}</a>
+                </div>
+            {% endfor %}
         </form>
     </div>
 </body>
