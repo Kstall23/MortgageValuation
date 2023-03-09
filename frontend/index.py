@@ -29,12 +29,13 @@ def index():
 
 @app.route("/", methods=['POST'])
 def uploadFiles():
+    pattern = re.compile(r'.*\.csv$')
     uploaded_file = request.files['file']
-    if uploaded_file.filename != '':
+    if pattern.match(uploaded_file.filename):
         file_path = os.path.join('../backend/database/individualFiles', uploaded_file.filename)
         uploaded_file.save(file_path)
     else:
-        flash("Please select a file before submitting.")
+        flash("Please select a valid csv file before submitting.")
         return redirect('/')
     return redirect('/onImport/' + uploaded_file.filename)
 

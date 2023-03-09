@@ -21,7 +21,11 @@
         <h1>Upload History</h1>
             {% for file in filenames %}
                 <div class="historyLine">
-                    <a href="{{url_for('delete_file', file_name=file)}}" class="delete"> x </a>
+                    <a href="{{url_for('delete_file', file_name=file)}}"
+                       class="delete"
+                       onclick="return confirm('Are you sure you want to delete this file?')">
+                        <img src={{url_for('static',filename='icons/x-1.png')}}>
+                    </a>
                     <a href="{{url_for('mortgageDetails', file_name=file)}}">{{ file }}</a>
                 </div>
             {% endfor %}

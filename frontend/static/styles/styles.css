@@ -61,8 +61,8 @@ a, p{
 
 a{
     display: inline;
-    margin: 5px;
     padding: 0px;
+    margin: 0px 5px;
 }
 
 span{
@@ -92,7 +92,12 @@ span{
     display: inline;
 }
 
+a:hover, img:hover{
+    transform: scale(95%);
+}
+
 .historyLine{
-    display: block;
+    display: flex;
+    align-content: center;
     margin-bottom: 10px;
 }
