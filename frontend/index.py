@@ -49,8 +49,7 @@ def mortgageDetails(file_name):
         bs = True
     else:
         bs = False
-    icon = "icon"
-    return render_template('mortgageDetails.html', data=data, recommendation=bs, icon=icon, file_name=file_name)
+    return render_template('mortgageDetails.html', data=data, recommendation=bs, file_name=file_name)
 
 @app.route('/onImport/<file_name>/adjustRisk')
 def adjustRisk(file_name):

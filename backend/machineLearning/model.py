@@ -1,10 +1,12 @@
 import numpy as np
 import pandas as pd
+import os
+os.chdir('..')
 
 print("Hey look, maybe someday this will provide a prediction point.")
 
 # read in training data file as a pandas dataframe, assigning appropriate headers
-data = pd.read_csv('backend\database\TrainingData.csv', sep=',', names=["Title", "Owner", "Asset Type", "Unpaid Principal Balance", "Loan Term", "Note Rate", "PPP", "Value", "LTV", "PropType", "Occupancy"])
+data = pd.read_csv('database/TrainingData.csv', sep=',', names=["Title", "Owner", "Asset Type", "Unpaid Principal Balance", "Loan Term", "Note Rate", "PPP", "Value", "LTV", "PropType", "Occupancy"])
 
 for index, row in data.iterrows():
 
