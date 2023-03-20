@@ -87,6 +87,11 @@ span{
     border: 1px solid #93e6b2;
 }
 
+.default{
+    margin: 0;
+    padding: 0;
+}
+
 .delete{
     text-decoration: none;
     display: inline;

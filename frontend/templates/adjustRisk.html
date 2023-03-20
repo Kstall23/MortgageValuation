@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <title>Capstone Demo</title>
+</head>
+<body>
+    <a href={{ url_for('mortgageDetails', file_name=return_name) }} class="button">Return</a>
+    <div class="listing"></div>
+</body>
+</html>

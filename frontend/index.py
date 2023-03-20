@@ -7,7 +7,6 @@ import certifi
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.secret_key = "super secret key"
-TEST_API_URL = "https://api.coindesk.com/v1/bpi/currentprice.json"
 FILES_PATH = '../backend/database/individualFiles'
 
 
@@ -45,16 +44,17 @@ def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
     data = df.values[0]
-    price_response = urllib.request.urlopen(TEST_API_URL, cafile=certifi.where()).read()
-    bitcoinValueString = json.loads(price_response)['bpi']['USD']['rate']
-    bitcoinValue = int(re.sub(r'[^\w\s]', '', bitcoinValueString))
-    if bitcoinValue > 23000:
+    price_response = 21000
+    if price_response > 20000:
         bs = True
     else:
         bs = False
     icon = "icon"
-    return render_template('mortgageDetails.html', data=data, recommendation=bs, icon=icon)
+    return render_template('mortgageDetails.html', data=data, recommendation=bs, icon=icon, file_name=file_name)
 
+@app.route('/onImport/<file_name>/adjustRisk')
+def adjustRisk(file_name):
+    return render_template('adjustRisk.html', return_name=file_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
