@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
     <title>Capstone Demo</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("valueOutput");
+            output.innerHTML = "Moderately Aggressive";
+            slider.oninput = function() {
+                if(this.value==1){
+                    output.innerHTML = "Conservative";
+                }
+                else if(this.value==2){
+                    output.innerHTML = "Moderately Conservative";
+                }
+                else if(this.value==3){
+                    output.innerHTML = "Moderately Aggressive";
+                }
+                else if(this.value==4){
+                    output.innerHTML = "Aggressive";
+                }
+                else if(this.value==5){
+                   output.innerHTML = "Very Aggressive";
+                }
+            }
+        });
+    </script>
 </head>
 <body>
     <a href={{ url_for('mortgageDetails', file_name=return_name) }} , class="button return">Return</a>
     <h1>Adjust Risk Tolerance</h1>
     <div class="listing">
-        <h4>Predicted Value Attributes</h4>
-        <h4>Adjust Risk Tolerance</h4>
+        <form method="POST" action="" enctype="text/plain">
+            <div class="slidecontainer">
+                <input name="slider" type="range" min="1" max="5" class="slider" id="myRange">
+                <p id="valueOutput"></p>
+            </div>
+            <input type="submit" value="Submit" name="submit" class="button submit")>
+        </form>
     </div>
 </body>
 </html>

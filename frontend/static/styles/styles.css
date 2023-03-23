@@ -82,9 +82,19 @@ span{
     padding: 20px;
 }
 
-#ppp{
+#pppt{
     border-radius: 10px;
-    border: 1px solid #93e6b2;
+    background: #93e6b2;
+    padding: 5px;
+    text-align: center;
+}
+
+#pppf{
+    border-radius: 10px;
+    background: #e84259;
+    color: white;
+    padding: 5px;
+    text-align: center;
 }
 
 .default{
@@ -105,4 +115,37 @@ a:hover, img:hover{
     display: flex;
     align-content: center;
     margin-bottom: 10px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    border-radius: 5px;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    background-color: #f0f7f7;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #93e6b2;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slidecontainer{
+    margin: 20px 0px;
 }

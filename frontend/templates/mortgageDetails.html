@@ -4,6 +4,14 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
         <title>Capstone Demo</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                let recommendation = document.getElementById("pppt");
+                if(recommendation.textContent == "Not Recommended"){
+                    recommendation.id = "pppf"
+                }
+            });
+        </script>
     </head>
     <body>
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
@@ -28,9 +36,9 @@
                         <h4>Note Rate</h4>
                         <p>{{data[5]}}</p>
                 </div>
-                <div class="item" id="ppp">
+                <div class="item">
                     <h4>Brightvine Intelligence</h4>
-                    <a href="{{url_for('adjustRisk', file_name=file_name)}}" class="default"><p>{{recommendation}}</p></a>
+                    <p  id="pppt">{{recommendation}}</p>
                 </div>
             </span>
             <span>
@@ -51,6 +59,10 @@
                         <p>{{data[10]}}</p>
                 </div>
             </span>
+        </div>
+        <div class="listing">
+            <h2>Explore More</h2>
+            <p><a href="{{url_for('adjustRisk', file_name=file_name)}}" class="default">Adjust Risk Tolerance</a></p>
         </div>
     </body>
 </html>
