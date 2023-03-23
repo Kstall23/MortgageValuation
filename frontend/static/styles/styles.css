@@ -82,19 +82,45 @@ span{
     padding: 20px;
 }
 
-#pppt{
+.line{
+    display: flex;
+    align-content: center;
+    padding-left: 10px;
+    margin: 10px;
+}
+
+.minor_line{
+    padding-left: 0px;
+}
+
+.bubble-box{
     border-radius: 10px;
-    background: #93e6b2;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
+    cursor: pointer;
+}
+
+#pppt{
+    background: #93e6b2;
 }
 
 #pppf{
-    border-radius: 10px;
     background: #e84259;
     color: white;
-    padding: 5px;
-    text-align: center;
+}
+
+#explore{
+    display: none;
+}
+
+.check{
+    width: 25px;
+    height: 25px;
+    margin: auto 0px;
+}
+
+.check:hover{
+    transform: none;
 }
 
 .default{

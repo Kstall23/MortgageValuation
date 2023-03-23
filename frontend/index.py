@@ -40,12 +40,11 @@ def uploadFiles():
 
 
 @app.route('/onImport/<file_name>')
-@app.route('/onImport/<file_name>/<int:risk>')
-def mortgageDetails(file_name, risk=3):
+def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
     data = df.values[0]
-    if risk > 3:
+    if True:
         ppp = "Recommended"
     else:
         ppp = "Not Recommended"
@@ -54,12 +53,6 @@ def mortgageDetails(file_name, risk=3):
 @app.route('/onImport/<file_name>/adjustRisk')
 def adjustRisk(file_name):
     return render_template('adjustRisk.html', return_name=file_name)
-
-@app.route('/onImport/<file_name>/adjustRisk', methods=['POST'])
-def submitRisk(file_name):
-    print("values: ", request.form.to_dict())
-    risk= 3;
-    return redirect('/onImport/' + file_name + "/" + str(risk))
 
 if __name__ == '__main__':
     app.run(debug=True)
