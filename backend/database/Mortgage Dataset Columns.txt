@@ -1,31 +1,31 @@
 Mortgage Dataset Columns
 
-Total Monthly Income Amount
+Total Monthly Income Amount (MonthlyIncome)
 ---The total monthly qualifying income used for underwriting in whole dollars for all borrowers on the loan.
 
-Loan Acquisition Actual UPB Amt
+Loan Acquisition Actual UPB Amt (UPBatAcquisition)
 ---The Amount of unpaid principal balance in whole dollars when acquired by the FHLBank
 
-LTV Ratio Percent
+LTV Ratio Percent (LTVRatio)
 ---The loan-to-value ratio of the mortgage at time of origination.
 
-Borrower Count
+Borrower Count (BorrowerCount)
 ---Number of Borrowers
 
-Note Rate Percent
+Note Rate Percent (InterestRate)
 ---Interest rate on the mortgage at acquisition
 
-Note Amount
+Note Amount (OriginationValue)
 ---Mortgage balance at origination
 
-Housing Expense Ratio Percent
+Housing Expense Ratio Percent (HousingExpenseToIncome)
 ---Ratio of mortgage principal and interest and housing expenses to total borrower income.
 
-Total Debt Expense Ratio Percent
+Total Debt Expense Ratio Percent (TotalDebtToIncome)
 ---Ratio of all debt payments to total borrower income.
 
-Borrower 1 Credit Score Value
+Borrower 1 Credit Score Value (B1CreditScore)
 ---Credit Scores are separated into a range: 1=<620, 2=620 < 660, 3=660 < 700, 4=700 < 760, 5=760 or greater, 9 = Missing or Not Applicable
 
-Borrower 2 Credit Score Value
+Borrower 2 Credit Score Value (B2CreditScore)
 ---Credit Scores are separated into a range: 1=<620, 2=620 < 660, 3=660 < 700, 4=700 < 760, 5=760 or greater, 9 = Missing or Not Applicable

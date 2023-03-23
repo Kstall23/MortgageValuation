@@ -32,37 +32,16 @@ finally:
 
 # ==PULL== some data and read it
 repo.remotes.origin.pull()       # pull most recent repo down locally
-input_file_name = "TrainingData.csv"
-data = pd.read_csv(os.path.join(repo_dir, input_file_name), sep=',', names=["Title", "Owner", "Asset Type", "Unpaid Principal Balance", "Loan Term", "Note Rate", "PPP", "Value", "LTV", "PropType", "Occupancy"], header=0)
+input_file_name = "Mortgage Dataset.csv"
+data = pd.read_csv(os.path.join(repo_dir, input_file_name), sep=',', names=['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore'], header=0)
 
 print("...Reading an input file from remote repo...")
-print(data["Owner"])
+print(data.head())
+print(data["LTVRatio"][:10])
+print(len(data))
 
+# There's freaking over 236,000 lines of data here, and it's just three years' worth
 
-# create or edit a file
-output_file_name = os.path.join(repo_dir, "output.txt")
-out = open(output_file_name, "a")
-# Loop through the DataFrame and write some data to output file
-for index, row in data.iterrows():
-    out.write("Row " + str(index) + "\n")
-    out.write("Owner " + row['Owner'] + " has a " + row['Asset Type'] + " on this property: " + row['Title'])
-    out.write("\n\n")
-out.close()
+# Try some K - Means Clustering?
 
-
-# ==PUSH== new changes back to the remote repo, added a bunch of prints to show repo status throughout
-time = str(datetime.now())
-print("\n...file edited")
-print(repo.git.status())
-
-repo.index.add([output_file_name])
-print("\n...file added")
-print(repo.git.status())
-
-repo.index.commit(time + " new output file commit")
-print("\n...file committed")
-print(repo.git.status())
-
-repo.remotes.origin.push()
-print("\n...file pushed")
-print(repo.git.status())
+# Write the cluster centroid values back to a file and push to github?
