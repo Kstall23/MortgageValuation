@@ -15,18 +15,12 @@ def get_filenames():
     return files
 
 
-@app.route('/delete/<file_name>')
-def delete_file(file_name):
-    os.remove(FILES_PATH + "/" + file_name)
-    return redirect('/')
-
-
 @app.route('/')
 def index():
     return render_template('index.html', filenames=get_filenames())
 
 
-@app.route("/", methods=['POST'])
+@app.post("/")
 def uploadFiles():
     pattern = re.compile(r'.*\.csv$')
     uploaded_file = request.files['file']
@@ -36,10 +30,18 @@ def uploadFiles():
     else:
         flash("Please select a valid csv file before submitting.")
         return redirect('/')
-    return redirect('/onImport/' + uploaded_file.filename)
+    return redirect('/mortgage/' + uploaded_file.filename)
 
 
-@app.route('/onImport/<file_name>')
+@app.route("/delete/<file_name>")
+def delete_file(file_name):
+    os.remove(FILES_PATH + "/" + file_name)
+    return redirect('/')
+
+@app.route('/mortgage')
+def createMortgage():
+    return render_template('createMortgage.html')
+@app.route('/mortgage/<file_name>')
 def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
@@ -49,10 +51,6 @@ def mortgageDetails(file_name):
     else:
         ppp = "Not Recommended"
     return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
-
-@app.route('/onImport/<file_name>/adjustRisk')
-def adjustRisk(file_name):
-    return render_template('adjustRisk.html', return_name=file_name)
 
 if __name__ == '__main__':
     app.run(debug=True)

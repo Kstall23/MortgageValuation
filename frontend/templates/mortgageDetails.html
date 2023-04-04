@@ -68,11 +68,15 @@
             <h2>Why is this investment {{recommendation.lower()}} by Brightvine?</h2>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
-                <p class="minor_line">Loan-to-value scores in the top 90% of loans nationwide: {{ data[8] }}</p>
+                <p class="minor_line">Loan-to-value scores in the top 90% of loans nationwide at {{ data[8] }}</p>
+            </div>
+            <div class="line">
+                <img src={{url_for('static',filename='icons/check.png')}} class="check">
+                <p class="minor_line">Principal balance of {{ data[3] }} points to higher payback</p>
             </div>
             <div class="line">
                 <img src={{url_for('static',filename='icons/x-mark.png')}} class="check">
-                <p class="minor_line">Note rate is extremely high: {{ data[5] }}</p>
+                <p class="minor_line">Note rate of {{ data[5] }} is extremely high</p>
             </div>
            <!--- <p><a href="{{url_for('adjustRisk', file_name=file_name)}}" class="button bubble-box">Adjust Risk Tolerance</a></p> -->
         </div>
