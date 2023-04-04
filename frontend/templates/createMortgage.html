@@ -31,14 +31,14 @@
 </head>
 <body>
     <a href={{ url_for('index') }} , class="button return">Return</a>
-    <h1>Adjust Risk Tolerance</h1>
+    <h1>{{title}}</h1>
     <div class="listing">
         <form>
             <div class="slidecontainer">
                 <input name="slider" type="range" min="1" max="5" class="slider" id="myRange">
                 <p id="valueOutput"></p>
             </div>
-            <input type="submit" value="Submit" name="submit" class="button submit")>
+            <input type="submit" value="Submit" class="button submit")>
         </form>
     </div>
 </body>

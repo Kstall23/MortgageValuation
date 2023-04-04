@@ -1,8 +1,8 @@
-import os, re
+import os, re, sys
 from flask import Flask, redirect, url_for, request, render_template, flash
 import pandas as pd
-import urllib.request, json
-import certifi
+sys.path.append(os.path.abspath(os.pardir)+'/backend/machineLearning')
+import demoPrediction
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -40,7 +40,9 @@ def delete_file(file_name):
 
 @app.route('/mortgage')
 def createMortgage():
-    return render_template('createMortgage.html')
+    output1 = demoPrediction.predict()
+    print(output1)
+    return render_template('createMortgage.html', title=output1)
 @app.route('/mortgage/<file_name>')
 def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
