@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capstone Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/loader.css') }}">
+    <script>
+      function navigate() {
+          console.log("navigating to..." + window.location.href.split('/load')[0])
+          window.location.href = window.location.href.split('/load')[0];  // redirect when done!
+      }
+      fetch('delay').then(navigate); // delay then navigate
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="loader"></div>
+    </div>
+    <div class="content2">
+        <div class="marquee1">Extracting Data from {{file_name}}</div>
+        <div class="marquee2">Generating Prediction</div>
+    </div>
+</body>
+</html>

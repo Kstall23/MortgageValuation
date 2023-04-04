@@ -1,2 +1,2 @@
 def predict():
-    return 'predicted'
+    return '$200,000'
