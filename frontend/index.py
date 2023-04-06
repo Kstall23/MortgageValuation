@@ -10,18 +10,18 @@ app.config["DEBUG"] = True
 app.secret_key = "super secret key"
 FILES_PATH = '../backend/database/individualFiles'
 
-#Home Page
+# Home Page
 @app.route('/')
 def index():
     return render_template('index.html', filenames=get_filenames())
 
-# Return All Uploaded Files
+# Return File History
 @app.get("/")
 def get_filenames():
     files = os.listdir(FILES_PATH)
     return files
 
-#Upload Files
+# Upload Files
 @app.post("/")
 def uploadFiles():
     pattern = re.compile(r'.*\.csv$')
@@ -34,10 +34,17 @@ def uploadFiles():
         return redirect('/')
     return redirect('/'+uploaded_file.filename+'/load')
 
-#Load Specified Mortgage
-@app.route('/<file_name>/load')
+#Loading Simulation
+@app.get('/<file_name>/load')
 def loadMortgage(file_name):
     return render_template('loader.html', file_name=file_name)
+
+#Generate Predicted Value
+@app.get('/<file_name>/predict')
+def predict(file_name):
+    output1 = demoPrediction.predict(file_name)
+    print(output1)
+    return jsonify("Prediction Complete: ", output1)
 
 #View Specified Mortgage
 @app.get('/<file_name>')
@@ -51,23 +58,10 @@ def mortgageDetails(file_name):
         ppp = "Not Recommended"
     return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
 
-@app.route("/<file_name>/delay")
-def delay(file_name):
-    import time
-    time.sleep(5)
-    return jsonify("Delay Complete: ", file_name)
-
 # Delete Specified File
 @app.route("/delete/<file_name>")
 def delete_file(file_name):
     os.remove(FILES_PATH + "/" + file_name)
-    return redirect('/')
-
-#Demo Predicted Value
-@app.route('/predict')
-def practicePrediction():
-    output1 = demoPrediction.predict()
-    print(output1)
     return redirect('/')
 
 if __name__ == '__main__':

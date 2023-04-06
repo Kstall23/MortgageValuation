@@ -32,7 +32,7 @@ body {
 }
 
 .marquee2{
-    animation: marquee 2s linear 2s 1;
+    animation: marquee 2s linear 2s infinite;
     opacity: 0%;
     margin-top: -20px;
 }

@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Capstone Demo</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/loader.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
     <script>
       function navigate() {
           console.log("navigating to..." + window.location.href.split('/load')[0])
           window.location.href = window.location.href.split('/load')[0];  // redirect when done!
       }
-      fetch('delay').then(navigate); // delay then navigate
+      fetch('predict').then(navigate); // delay then navigate
     </script>
 </head>
 <body>
