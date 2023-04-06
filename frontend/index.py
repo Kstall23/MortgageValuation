@@ -42,17 +42,20 @@ def loadMortgage(file_name):
 #Generate Predicted Value
 @app.get('/<file_name>/predict')
 def predict(file_name):
-    output1 = demoPrediction.predict(file_name)
-    print(output1)
-    return jsonify("Prediction Complete: ", output1)
+    file_path = "../backend/database/individualFiles/" + file_name
+    df = pd.read_csv(file_path)
+    df['PPP'] = demoPrediction.predict(file_name)
+    df.to_csv(file_path)
+    return jsonify("Prediction Complete!")
 
 #View Specified Mortgage
 @app.get('/<file_name>')
 def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
-    data = df.values[0]
-    if True:
+    data = df.to_dict('records')[0]
+    ppp_int = int(data['PPP'].replace("$","").replace(",", ""))
+    if ppp_int > 100000:
         ppp = "Recommended"
     else:
         ppp = "Not Recommended"

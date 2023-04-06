@@ -22,46 +22,46 @@
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
         <h1>Mortgage Details</h1>
         <div class="listing">
-            <h2>{{data[0]}}</h2>
-            <h3>{{data[1]}}</h3>
+            <h2>{{data['Title']}}</h2>
+            <h3>{{data['Owner']}}</h3>
             <span>
                 <div class="item">
                     <h4>Asset Type</h4>
-                    <p>{{data[2]}}</p>
+                    <p>{{data['Asset Type']}}</p>
                 </div>
                 <div class="item">
                         <h4>Unpaid Principal Balance</h4>
-                        <p>{{data[3]}}</p>
+                        <p>{{data['Unpaid Principal Balance']}}</p>
                 </div>
                 <div class="item">
                         <h4>Loan Term</h4>
-                        <p>{{data[4]}}</p>
+                        <p>{{data['Loan Term']}}</p>
                 </div>
                 <div class="item">
                         <h4>Note Rate</h4>
-                        <p>{{data[5]}}</p>
+                        <p>{{data['Note Rate']}}</p>
                 </div>
                 <div class="item">
-                    <h4>Brightvine Intelligence</h4>
-                    <p  id="pppt" class="bubble-box">{{recommendation}}</p>
+                    <h4>Brightvine Predicted Value</h4>
+                    <p  id="pppt" class="bubble-box">{{data['PPP']}}</p>
                 </div>
             </span>
             <span>
                 <div class="item">
                         <h4>Appraised Value</h4>
-                        <p>{{data[7]}}</p>
+                        <p>{{data['Value']}}</p>
                 </div>
                 <div class="item">
                         <h4>Loan-To-Value</h4>
-                        <p>{{data[8]}}</p>
+                        <p>{{data['LTV']}}</p>
                 </div>
                 <div class="item">
                         <h4>Property Type</h4>
-                        <p>{{data[9]}}</p>
+                        <p>{{data['PropType']}}</p>
                 </div>
                 <div class="item">
                         <h4>Occupancy Status</h4>
-                        <p>{{data[10]}}</p>
+                        <p>{{data['Occupancy']}}</p>
                 </div>
             </span>
         </div>
