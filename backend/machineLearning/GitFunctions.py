@@ -1,6 +1,4 @@
-import numpy as np
 import pandas as pd
-from datetime import datetime
 import git
 from git import Repo
 import os
@@ -48,15 +46,20 @@ def readData(repo_dir, input_file_name, columns):
 # ---------------------------------------------------------------
 # ==PUSH== new changes back to the remote repo, 
 # added a bunch of prints to show repo status throughout
-def pushRepo(repo, output_file_name):
+def pushRepo(repo, output_file_name, commit_msg):
     print("\n...file edited")
     print(repo.git.status())
 
-    repo.index.add([output_file_name])
+    if type(output_file_name) == str:           # if only one file, will show up as a string
+        add_files = [output_file_name]          # and it needs to be thrown in a list to be read by git.add
+    if type(output_file_name) == list:          # if multiple files, will show up as a list
+        add_files = output_file_name            # and it's already in list form for git.add
+
+    repo.index.add(add_files)
     print("\n...file added")
     print(repo.git.status())
 
-    repo.index.commit("Some data")
+    repo.index.commit(commit_msg)
     print("\n...file committed")
     print(repo.git.status())
 
@@ -64,45 +67,3 @@ def pushRepo(repo, output_file_name):
     print("\n...file pushed")
     print(repo.git.status())
 # ---------------------------------------------------------------
-
-
-# ---------------------------------------------------------------
-# Run the functions
-
-checkDirectory()                # check if we're working in right folder
-repo, repo_dir = getRepo()      # create or load the repo, pull current status
-
-# Get ready to load data
-input_file_name = "Mortgage Dataset.csv"
-columns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore']
-data = readData(repo_dir, input_file_name, columns)    # read data into pandas DataFrame
-
-
-''' # Now edit the dataframe and push it to a new Excel File '''
-newData = data.copy()
-
-# Add column for Loan Performance
-newData['Performance'] = ["Current"] * len(data)
-
-# Add column for original property value
-valueColumn = []
-for index, row in data.iterrows():
-    valueColumn.append(row['OriginationValue'] / (row['LTVRatio'] / 100))
-newData['PropertyValue'] = valueColumn
-
-# Add column for current property value
-newData['CurrentPropertyValue'] = valueColumn
-
-# Add column for the change in property value
-changes = []
-for index, row in newData.iterrows():
-    changes.append((row['PropertyValue'] - row['CurrentPropertyValue']) / row['PropertyValue'])
-newData['ValueChange'] = changes
-
-# Write out this new dataframe to a csv
-output_file_name = "NewData.csv"
-newData.to_csv(os.path.join(repo_dir, output_file_name))
-
-
-
-pushRepo(repo, output_file_name)        # push local changes to the remote repository

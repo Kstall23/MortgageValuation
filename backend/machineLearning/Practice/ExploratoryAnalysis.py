@@ -33,7 +33,7 @@ print()
 ''' # Preprocessing steps '''
 data = PreProcessing.removeMissing(data)
 data = PreProcessing.removeExtremeOutliers(data, columns)
-data, columns = PreProcessing.normalize(data, columns)
+data, columns, ss = PreProcessing.normalize(data, columns)
 trainData, testData = PreProcessing.create_folds(data)
 
 
@@ -49,11 +49,19 @@ pca_data = pca.fit_transform(data)
 
 # Use KMeans to cluster the PCA-ed data
 kmeans = KMeans(n_clusters = NUM_CLUSTERS, n_init = 10)
-clusters = kmeans.fit_predict(data)
+clusters = kmeans.fit_predict(pca_data)
 
 # Reduce to 2 components this time to graph it
 pca2 = PCA(n_components=2)
 pca_data2 = pca2.fit_transform(data)
+
+
+''' # Look at the cluster centroids, do they mean anything? '''
+print(kmeans.cluster_centers_)
+inversed_centroids = pd.DataFrame(ss.inverse_transform(pca.inverse_transform(kmeans.cluster_centers_)), columns=columns)
+print(inversed_centroids)
+for col in columns:
+    print(inversed_centroids.sort_values(col, axis=0))
 
 
 ''' # Graph Biplot on 2 PCAs, with arrows, subplots separated by cluster '''

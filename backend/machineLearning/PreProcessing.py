@@ -70,7 +70,7 @@ def normalize(data, columns):
     # transform back into a DataFrame so we can still use column headers
     standDataFrame = pd.DataFrame(standData, columns=columns)
 
-    return standDataFrame, columns
+    return standDataFrame, columns, ss
 
 
 def create_folds(data):
