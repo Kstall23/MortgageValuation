@@ -5,6 +5,10 @@ from tensorflow import keras
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
+# VARIABLES - found in previous exploratory analysis
+NUM_CLUSTERS = 8
+NUM_PCS = 6
+
 ''' ============================================================= '''
 ''' === Functions for handling some preprocessing of the data === '''
 ''' ============================================================= '''
@@ -22,25 +26,20 @@ def removeMissing(data):
         print("......." + str(start-end) + " rows dropped with at least one missing value\n")
     return data
 
+
 def removeExtremeOutliers(data, columns):
     print("....Removing extreme outliers....")
     print(".......Dropping rows with values outside the whiskers of length 3 x IQR\n")
     
-    # set up columns to check for outliers
-    columnsForOutliers = columns.copy()
-    safeCols = ['Year', 'B1CreditScore', 'B2CreditScore']
-    for col in safeCols:
-        columnsForOutliers.remove(col)
-
     # gather quartile limits for each column
     limits = {}
-    for col in columnsForOutliers:
+    for col in columns:
         limits[col] = (3 * (data[col].quantile(.75) - data[col].quantile(.25))) + data[col].quantile(.75)
 
     # remove outliers from each column
     start = len(data)
     thisStart = len(data)
-    for col in columnsForOutliers:
+    for col in columns:
         data = data[data[col] < limits[col]]
         
         end = len(data)
@@ -79,3 +78,41 @@ def create_folds(data):
     train, test = train_test_split(data, test_size=0.1)
     print(".........." + str(len(train)) + " points in the training set and " + str(len(test)) + " points in the test set\n")
     return train, test
+
+
+''' ======================================================================== '''
+''' === Functions for handling some preprocessing of the test data point === '''
+''' ======================================================================== '''
+
+def testHandleMissing(originalPoint):
+    # handle missing MonthlyIncome
+    # TODO: give it a value of 0
+
+    # handle missing UPBatAcquisition
+    # TODO: I don't think we can operate without this info, throw error?
+
+    # handle missing LTVRatio
+    # TODO: I don't think we can operate without this info, throw error?
+    
+    # handle missing BorrowerCount
+    # TODO: give it a value of 1, B1 and B2 value of 9
+
+    # handle missing InterestRate
+    # TODO: I don't think we can operate without this info, throw error?
+
+    # handle missing OriginationValue
+    # TODO: I don't think we can operate without this info, throw error?
+
+    # handle missing HousingExpenseToIncome
+    # TODO: give it a value of 999
+
+    # handle missing TotalDebtToIncome
+    # TODO: give it a value of 999
+
+    # handle missing B1CreditScore
+    # TODO: give it a value of 9
+
+    # handle missing B2CreditScore
+    # TODO: give it a value of 9
+    newPoint = originalPoint
+    return newPoint

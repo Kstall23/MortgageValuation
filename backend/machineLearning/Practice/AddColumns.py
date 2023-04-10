@@ -56,7 +56,7 @@ def pushRepo(repo, output_file_name):
     print("\n...file added")
     print(repo.git.status())
 
-    repo.index.commit("Some data")
+    repo.index.commit("Uploaded data")
     print("\n...file committed")
     print(repo.git.status())
 
@@ -93,11 +93,16 @@ newData['PropertyValue'] = valueColumn
 # Add column for current property value
 newData['CurrentPropertyValue'] = valueColumn
 
-# Add column for the change in property value
+# Add column for the percent change in property value
 changes = []
 for index, row in newData.iterrows():
-    changes.append((row['PropertyValue'] - row['CurrentPropertyValue']) / row['PropertyValue'])
+    changes.append((row['CurrentPropertyValue'] - row['PropertyValue']) / row['PropertyValue'] * 100)
 newData['ValueChange'] = changes
+
+# Add column for the price of the loan
+prices = np.asarray(data['UPBatAcquisition'])
+newData['Price'] = prices
+
 
 # Write out this new dataframe to a csv
 output_file_name = "NewData.csv"
