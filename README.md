@@ -14,6 +14,11 @@ source ./env/bin/activate
 pip install Flask tensorflow pytest scikit-learn gitpython
 ```
 
+-To train model run::
+```
+python3 backend/machineLearning/trainingModel.py
+```
+
 -Run index.py:
 ```
 python3 frontend/index.py
