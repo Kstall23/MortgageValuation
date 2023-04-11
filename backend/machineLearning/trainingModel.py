@@ -116,7 +116,7 @@ def trainingClustersDriver():
     file_names = storeClusterData(repo_dir, std_centroids, columns, cluster_labels, no_outliers_data, ss, pca, kmeans)
 
     # Push these files to the 'database'
-    msg = str(datetime.now()) + " Cluster Database Update"
+    msg = datetime.now().strftime("%d-%m-%y %H:%M") + " Cluster Database Update"
     gf.pushRepo(repo, 'ModelOutputFiles/', msg)
     
 # ------------------------------------------
