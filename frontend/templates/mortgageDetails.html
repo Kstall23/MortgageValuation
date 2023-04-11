@@ -22,12 +22,11 @@
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
         <h1>Mortgage Details</h1>
         <div class="listing">
-            <h2>{{data['Title']}}</h2>
-            <h3>{{data['Owner']}}</h3>
+            <h3>Loan Number: <span id="green">{{ data['Loan Number'] }}</span></h3>
             <span>
                 <div class="item">
-                    <h4>Asset Type</h4>
-                    <p>{{data['Asset Type']}}</p>
+                    <h4>Price</h4>
+                    <p>{{ data['Price'] }}</p>
                 </div>
                 <div class="item">
                         <h4>Unpaid Principal Balance</h4>
@@ -38,8 +37,8 @@
                         <p>{{data['Loan Term']}}</p>
                 </div>
                 <div class="item">
-                        <h4>Note Rate</h4>
-                        <p>{{data['Note Rate']}}</p>
+                        <h4>Current Interest Rate</h4>
+                        <p>{{data['Current Interest Rate']}}</p>
                 </div>
                 <div class="item">
                     <h4>Brightvine Predicted Value</h4>
@@ -62,6 +61,11 @@
                 <div class="item">
                         <h4>Occupancy Status</h4>
                         <p>{{data['Occupancy']}}</p>
+                </div>
+            </span>
+            <span>
+                <div class="item">
+                    <p><a id="documents">Documents</a></p>
                 </div>
             </span>
         </div>

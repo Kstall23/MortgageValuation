@@ -69,6 +69,12 @@ span{
     display: flex;
 }
 
+#green{
+    color: #1daf97;
+    display: inline;
+    font-size: 16px;
+}
+
 .item{
     display: block;
     margin-right: 20px;
@@ -143,35 +149,8 @@ a:hover, img:hover{
     margin-bottom: 10px;
 }
 
-.slider {
-    -webkit-appearance: none;
-    width: 50%;
-    height: 15px;
-    border-radius: 5px;
-    outline: none;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-    background-color: #f0f7f7;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #93e6b2;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #04AA6D;
-  cursor: pointer;
-}
-
-.slidecontainer{
-    margin: 20px 0px;
+#documents{
+    color: #1daf97;
+    text-decoration: underline;
+    margin: 0px ;
 }

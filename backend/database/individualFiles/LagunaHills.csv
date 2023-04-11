@@ -1,2 +1,2 @@
-Title,Owner,Asset Type,Unpaid Principal Balance,Loan Term, Note Rate,PPP,Value,LTV,PropType,Occupancy
-Laguna Hills,LAHILLS,Mortgage Token,"$1,500,000.00 ",30 years,5.50%,____,"$2,000,000.00 ",75%,Single Family Residence (SFR),Primary Residence
+Loan Number,Price,Unpaid Principal Balance,Loan Term,Current Interest Rate,Value,LTV,PropType,Occupancy,PPP
+5A18329F7,1500000.00, 1500000.00, 30 years,5.50%,2000000.00,75%,Single Family Residence (SFR),Primary Residence, 200000.00
