@@ -11,7 +11,7 @@ source ./env/bin/activate
 
 -Install packages by running:
 ```
-pip install Flask tensorflow pytest scikit-learn
+pip install Flask tensorflow pytest scikit-learn gitpython
 ```
 
 -Run index.py:
