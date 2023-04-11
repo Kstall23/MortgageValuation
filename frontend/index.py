@@ -54,11 +54,10 @@ def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
-    ppp_int = int(data['PPP'].replace("$","").replace(",", ""))
-    if ppp_int > 100000:
-        ppp = "Recommended"
-    else:
-        ppp = "Not Recommended"
+    for item in ['Price', 'Unpaid Principal Balance', 'PPP', 'Value']:
+        if not isinstance(data[item], str):
+            data[item] = "${:,.2f}".format(data[item])
+    ppp = "Recommended"
     return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
 
 # Delete Specified File
