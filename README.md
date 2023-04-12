@@ -9,9 +9,14 @@ python3 -m venv env
 source ./env/bin/activate
 ```
 
--Install flask by running:
+-Install packages by running:
 ```
-pip install Flask
+pip install Flask tensorflow pytest scikit-learn gitpython
+```
+
+-To train model run::
+```
+python3 backend/machineLearning/trainingModel.py
 ```
 
 -Run index.py:
