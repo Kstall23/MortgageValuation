@@ -8,6 +8,7 @@ import GitFunctions as gf
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
+from sklearn.neighbors import NearestNeighbors
 import pickle
 
 # VARIABLES - found in previous exploratory analysis
@@ -82,18 +83,34 @@ def testPointProcessing(fullPoint, ss, pca):
 
 # ------------------------------------------------
 
-def provideSuggestion(point, repo_dir, kmeans, fullPoint):
+def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
     # Determine which cluster the new point belongs to
     [cluster] = kmeans.predict(point)
 
     # ==LOAD== the data associated with that cluster from the database repo
     cluster_file_name = "ModelOutputFiles/" + str(cluster) + "ClusterData.csv"
     fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore', 'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
-    fullClusterData = gf.readData(repo_dir, cluster_file_name, fullColumns)     # load the data point into a dataframe
+    full_cluster_data = gf.readData(repo_dir, cluster_file_name, fullColumns)     # load the data point into a dataframe
 
-    # Determine a price suggestion based on average price of cluster-mates
-    # Every point in this cluster? Some fraction of the points?
-    price = fullClusterData['Price'].mean()
+    # # Determine a price suggestion based on average price of cluster-mates
+    # price = fullClusterData['Price'].mean()
+
+    # Determine a price suggestion by running K-Nearest-Neighbor within the cluster data
+    # Have to prepare the cluster data for distance comparisons
+    columnsForClustering = ['MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore']
+    reduced_cluster_data = full_cluster_data[columnsForClustering]
+    std_cluster_data = pd.DataFrame(ss.transform(reduced_cluster_data), columns=columnsForClustering)
+    pca_cluster_data = pca.transform(std_cluster_data)
+    
+    # Then create a new knn object for finding the nearest neighbors
+    knn = NearestNeighbors(n_neighbors=5)
+    knn = knn.fit(pca_cluster_data)                     # fit the object with the 'training data'
+    distances, [indices] = knn.kneighbors(point)        # find the nearest points by passing in the 'test data point'
+
+    # And make a prediction based on these neighbors
+    neighbors = full_cluster_data.iloc[indices]
+    price = neighbors['Price'].mean()
+
 
     # Add flags if the loan is currently Delinquent or has significant (app/dep)reciation
     fullPoint = pd.Series(fullPoint.iloc[0])
@@ -131,7 +148,7 @@ def testOnePointDriver():
     point = testPointProcessing(fullPoint, ss, pca)
 
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
-    suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, kmeans, fullPoint)
+    suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
 
     print(suggestionNumber)
     print(delinq, appr, depr)

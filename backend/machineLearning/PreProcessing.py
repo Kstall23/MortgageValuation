@@ -6,7 +6,8 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
 # VARIABLES - found in previous exploratory analysis
-NUM_CLUSTERS = 8
+# NUM_CLUSTERS = 8
+NUM_CLUSTERS = 30
 NUM_PCS = 6
 
 ''' ============================================================= '''
