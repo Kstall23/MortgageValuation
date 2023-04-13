@@ -1,19 +1,25 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
-import os
+import os, sys
 
-import PreProcessing as pp
-import GitFunctions as gf
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from machineLearning import PreProcessing as pp
+from machineLearning import GitFunctions as gf
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
 import pickle
 
+import warnings
+
 # VARIABLES - found in previous exploratory analysis
-from PreProcessing import NUM_CLUSTERS
-from PreProcessing import NUM_PCS
+from machineLearning.PreProcessing import NUM_CLUSTERS
+from machineLearning.PreProcessing import NUM_PCS
+FILES_PATH = 'MortgageValuation/backend/database/individualFiles'
 
 # ------------------------------------------------
 
@@ -61,7 +67,7 @@ def getTestPoint(repo_dir):
     fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore', 'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
     fullPoint = gf.readData(repo_dir, input_file_name, fullColumns)     # load the data point into a dataframe
 
-    print(fullPoint['UPBatAcquisition'].iloc[0])
+    #print(fullPoint['UPBatAcquisition'].iloc[0])
 
     return fullPoint
 
@@ -136,7 +142,7 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
 
 def testOnePointDriver():
 
-    print("Hey look, maybe someday this will provide a prediction point.")
+    #print("Hey look, maybe someday this will provide a prediction point.")
 
     # set up repo, load in the cluster data
     repo, repo_dir, ss, pca, kmeans = getClusterData()
@@ -150,9 +156,40 @@ def testOnePointDriver():
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
     suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
 
-    print(suggestionNumber)
-    print(delinq, appr, depr)
+    print("Suggested price: ", str(suggestionNumber))
+    print("Flags: ", delinq, appr, depr)
+
+    gf.returnToFront()
+    return suggestionNumber
+
+def testFromUpload(file_name):
+
+    # set up repo, load in the cluster data
+    print("...Getting cluster data...")
+    repo, repo_dir, ss, pca, kmeans = getClusterData()
+
+    # load in new test point
+    print("...Reading an input file from upload...")
+    fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate',
+                   'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore',
+                   'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
+
+    #TODO: get file from filename and FILES_PATH
+    file_path = FILES_PATH + "/" + file_name
+    fullPoint = pd.read_csv(file_path, sep=',', names=fullColumns, header=0)
+
+    # preprocess the test point using data manipulation objects from training data
+    point = testPointProcessing(fullPoint, ss, pca)
+
+    # provide suggestion - place point in a cluster and draw pricing data from cluster members
+    suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
+
+    print("Suggested price: ", str(suggestionNumber))
+    print("Flags: ", delinq, appr, depr)
+
+    gf.returnToFront()
+    return suggestionNumber
 
 # ------------------------------------------------
-
-testOnePointDriver()
+if __name__ == "__main__":
+    testOnePointDriver()

@@ -2,8 +2,10 @@ import os, re, sys
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
 
-sys.path.append(os.path.abspath(os.pardir) + '/backend/machineLearning')
-import demoPrediction
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from machineLearning import predictionModel
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -44,19 +46,24 @@ def loadMortgage(file_name):
 def predict(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
-    df['PPP'] = demoPrediction.predict(file_name)
+    df['PPP'] = predictionModel.testFromUpload(file_name)
     df.to_csv(file_path)
     return jsonify("Prediction Complete!")
 
 #View Specified Mortgage
+#TODO change frontend to match test file
 @app.get('/<file_name>')
 def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
-    for item in ['Price', 'Unpaid Principal Balance', 'PPP', 'Value']:
+    print(data)
+    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
         if not isinstance(data[item], str):
             data[item] = "${:,.2f}".format(data[item])
+    for item in ['InterestRate', 'LTVRatio']:
+        if not isinstance(data[item], str):
+            data[item] = "{:.2%}".format(data[item]/100)
     ppp = "Recommended"
     return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
 
