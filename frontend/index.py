@@ -51,14 +51,19 @@ def predict(file_name):
     return jsonify("Prediction Complete!")
 
 #View Specified Mortgage
+#TODO change frontend to match test file
 @app.get('/<file_name>')
 def mortgageDetails(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
-    for item in ['Price', 'Unpaid Principal Balance', 'PPP', 'Value']:
+    print(data)
+    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
         if not isinstance(data[item], str):
             data[item] = "${:,.2f}".format(data[item])
+    for item in ['InterestRate', 'LTVRatio']:
+        if not isinstance(data[item], str):
+            data[item] = "{:.2%}".format(data[item]/100)
     ppp = "Recommended"
     return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
 

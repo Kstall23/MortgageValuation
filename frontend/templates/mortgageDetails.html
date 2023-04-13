@@ -22,7 +22,7 @@
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
         <h1>Mortgage Details</h1>
         <div class="listing">
-            <h3>Loan Number: <span id="green">{{ data['Loan Number'] }}</span></h3>
+            <h3>Loan Number: <span id="green">5A18329F7</span></h3>
             <span>
                 <div class="item">
                     <h4>Price</h4>
@@ -30,15 +30,15 @@
                 </div>
                 <div class="item">
                         <h4>Unpaid Principal Balance</h4>
-                        <p>{{data['Unpaid Principal Balance']}}</p>
+                        <p>{{data['UPBatAcquisition']}}</p>
                 </div>
                 <div class="item">
                         <h4>Loan Term</h4>
-                        <p>{{data['Loan Term']}}</p>
+                        <p>20 years</p>
                 </div>
                 <div class="item">
                         <h4>Current Interest Rate</h4>
-                        <p>{{data['Current Interest Rate']}}</p>
+                        <p>{{data['InterestRate']}}</p>
                 </div>
                 <div class="item">
                     <h4>Brightvine Predicted Value</h4>
@@ -48,19 +48,19 @@
             <span>
                 <div class="item">
                         <h4>Appraised Value</h4>
-                        <p>{{data['Value']}}</p>
+                        <p>{{data['PropertyValue']}}</p>
                 </div>
                 <div class="item">
                         <h4>Loan-To-Value</h4>
-                        <p>{{data['LTV']}}</p>
+                        <p>{{data['LTVRatio']}}</p>
                 </div>
                 <div class="item">
                         <h4>Property Type</h4>
-                        <p>{{data['PropType']}}</p>
+                        <p>Single Family Residence (SFR)</p>
                 </div>
                 <div class="item">
                         <h4>Occupancy Status</h4>
-                        <p>{{data['Occupancy']}}</p>
+                        <p>Primary Residence</p>
                 </div>
             </span>
             <span>
