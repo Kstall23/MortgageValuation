@@ -1,18 +1,21 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
-import os
+import os, sys
 import pickle
 
-import PreProcessing as pp
-import GitFunctions as gf
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from backend.machineLearning import PreProcessing as pp
+from backend.machineLearning import GitFunctions as gf
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
 # VARIABLES - found in previous exploratory analysis
-from PreProcessing import NUM_CLUSTERS
-from PreProcessing import NUM_PCS
+from backend.machineLearning.PreProcessing import NUM_CLUSTERS
+from backend.machineLearning.PreProcessing import NUM_PCS
 
 # ------------------------------------------------
 

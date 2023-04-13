@@ -6,6 +6,7 @@ parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
 backend_dir = os.path.join(parent_dir, "backend")
 sys.path.append(backend_dir)
 from machineLearning import predictionModel
+from machineLearning import trainingModel
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -39,6 +40,13 @@ def uploadFiles():
         return redirect('/')
     return redirect('/' + uploaded_file.filename + '/load')
 
+
+#Train Model
+@app.get('/train')
+def train():
+    print("Training model...")
+    trainingModel.trainingClustersDriver()
+    return redirect('/')
 
 # Loading Simulation
 @app.get('/<file_name>/load')

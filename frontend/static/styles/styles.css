@@ -166,3 +166,10 @@ a:hover, img:hover{
 #recommend{
     display: inline;
 }
+
+.retrain{
+    margin-left: 20px;
+    margin-bottom: 50px;
+    padding: 10px;
+    font-size: 10pt;
+}
