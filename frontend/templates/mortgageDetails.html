@@ -5,18 +5,7 @@
         <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
         <title>Capstone Demo</title>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                let recommendation = document.getElementById("pppt");
-                let explore = document.getElementById("explore");
-                if(recommendation.textContent == "Not Recommended"){
-                    recommendation.id = "pppf"
-                }
-                recommendation.onclick = function(){
-                    explore.style.display="block";
-                }
-            });
-        </script>
+        <script src="{{ url_for('static', filename='scripts/viewMortgage.js') }}"></script>
     </head>
     <body>
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
@@ -43,6 +32,7 @@
                 <div class="item">
                     <h4>Brightvine Predicted Value</h4>
                     <p  id="pppt" class="bubble-box">{{data['PPP']}}</p>
+                    <img src={{url_for('static',filename='icons/question.png')}} id="question">
                 </div>
             </span>
             <span>
@@ -70,18 +60,18 @@
             </span>
         </div>
         <div class="listing" id="explore">
-            <h2>Why is this investment {{recommendation.lower()}} by Brightvine?</h2>
+            <h2>Why is this investment <span id="recommend">{{recommendation.lower()}}</span> by Brightvine?</h2>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
-                <p class="minor_line">Loan-to-value scores in the top 90% of loans nationwide at {{ data[8] }}</p>
+                <p class="minor_line">Delinquency: {{ data['delinq'] }}</p>
             </div>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
-                <p class="minor_line">Principal balance of {{ data[3] }} points to higher payback</p>
+                <p class="minor_line">Appreciating in Value: {{ data['appr'] }}</p>
             </div>
             <div class="line">
                 <img src={{url_for('static',filename='icons/x-mark.png')}} class="check">
-                <p class="minor_line">Note rate of {{ data[5] }} is extremely high</p>
+                <p class="minor_line">Depreciating in Value: {{ data['depr'] }}</p>
             </div>
         </div>
     </body>
