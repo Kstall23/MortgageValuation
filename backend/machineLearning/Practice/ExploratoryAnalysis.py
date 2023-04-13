@@ -32,13 +32,14 @@ print()
 
 ''' # Preprocessing steps '''
 data = PreProcessing.removeMissing(data)
-data = PreProcessing.removeExtremeOutliers(data, columns)
+columnsForOutliers = ['MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome']
+data = PreProcessing.removeExtremeOutliers(data, columnsForOutliers)
 data, columns, ss = PreProcessing.normalize(data, columns)
 trainData, testData = PreProcessing.create_folds(data)
 
 
 ''' # Variables '''
-NUM_CLUSTERS = 8
+NUM_CLUSTERS = 30
 NUM_PCs = 6
 
 
@@ -57,62 +58,62 @@ pca_data2 = pca2.fit_transform(data)
 
 
 ''' # Look at the cluster centroids, do they mean anything? '''
-print(kmeans.cluster_centers_)
-inversed_centroids = pd.DataFrame(ss.inverse_transform(pca.inverse_transform(kmeans.cluster_centers_)), columns=columns)
-print(inversed_centroids)
-for col in columns:
-    print(inversed_centroids.sort_values(col, axis=0))
+# print(kmeans.cluster_centers_)
+# inversed_centroids = pd.DataFrame(ss.inverse_transform(pca.inverse_transform(kmeans.cluster_centers_)), columns=columns)
+# print(inversed_centroids)
+# for col in columns:
+#     print(inversed_centroids.sort_values(col, axis=0))
 
 
 ''' # Graph Biplot on 2 PCAs, with arrows, subplots separated by cluster '''
-if NUM_CLUSTERS % 3 == 0:
-    plus = 0
-else:
-    plus = 1
-subplot_rows = NUM_CLUSTERS // 3 + plus
+# if NUM_CLUSTERS % 3 == 0:
+#     plus = 0
+# else:
+#     plus = 1
+# subplot_rows = NUM_CLUSTERS // 3 + plus
 
-fig, ax = plt.subplots(subplot_rows,3, sharex=True, sharey=True)
-axrow = 0
-axcol = 0
-colors = ['red', 'darkorange', 'yellow', 'green', 'deepskyblue', 'darkblue', 'violet', 'hotpink', 'lightcoral', 'sandybrown', 'khaki', 'lime', 'cyan', 'slateblue', 'fuchsia']
+# fig, ax = plt.subplots(subplot_rows,3, sharex=True, sharey=True)
+# axrow = 0
+# axcol = 0
+# colors = ['red', 'darkorange', 'yellow', 'green', 'deepskyblue', 'darkblue', 'violet', 'hotpink', 'lightcoral', 'sandybrown', 'khaki', 'lime', 'cyan', 'slateblue', 'fuchsia']
 
-for i in range(NUM_CLUSTERS):
+# for i in range(NUM_CLUSTERS):
 
-    # deal with indexing the graph position
-    if (i % 3 == 0) and (i != 0):
-        axrow += 1
-        axcol = 0
+#     # deal with indexing the graph position
+#     if (i % 3 == 0) and (i != 0):
+#         axrow += 1
+#         axcol = 0
 
-    # grab the data for one cluster using a boolean mask
-    mask = clusters == i
-    masked_pca_data2 = pca_data2[mask]
+#     # grab the data for one cluster using a boolean mask
+#     mask = clusters == i
+#     masked_pca_data2 = pca_data2[mask]
 
-    # scale x and y
-    x = masked_pca_data2[:,0]
-    y = masked_pca_data2[:,1]
-    scalex = 1.0/(x.max() - x.min())
-    scaley = 1.0/(y.max() - y.min())
+#     # scale x and y
+#     x = masked_pca_data2[:,0]
+#     y = masked_pca_data2[:,1]
+#     scalex = 1.0/(x.max() - x.min())
+#     scaley = 1.0/(y.max() - y.min())
 
-    # variables
-    num_arrows = pca2.components_.shape[1]
-    xArrows = pca2.components_[0]
-    yArrows = pca2.components_[1]
-    cols = data.columns
+#     # variables
+#     num_arrows = pca2.components_.shape[1]
+#     xArrows = pca2.components_[0]
+#     yArrows = pca2.components_[1]
+#     cols = data.columns
 
-    # scatter plot
-    ax[axrow, axcol].scatter(x * scalex, y * scaley, c = colors[i])
+#     # scatter plot
+#     ax[axrow, axcol].scatter(x * scalex, y * scaley, c = colors[i])
 
-    # plot arrows
-    for j in range(num_arrows):
-        ax[axrow, axcol].arrow(0, 0, xArrows[j], yArrows[j], color='lightseagreen', alpha=0.75, lw=2)
-        ax[axrow, axcol].text(xArrows[j] * 1.15, yArrows[j] * 1.15, cols[j], color='black', size=10)
+#     # plot arrows
+#     for j in range(num_arrows):
+#         ax[axrow, axcol].arrow(0, 0, xArrows[j], yArrows[j], color='lightseagreen', alpha=0.75, lw=2)
+#         ax[axrow, axcol].text(xArrows[j] * 1.15, yArrows[j] * 1.15, cols[j], color='black', size=10)
 
-    ax[axrow, axcol].grid(alpha=.4)
-    ax[axrow, axcol].set_title("Cluster " + str(i))
+#     ax[axrow, axcol].grid(alpha=.4)
+#     ax[axrow, axcol].set_title("Cluster " + str(i))
 
-    axcol += 1
+#     axcol += 1
 
-plt.show()
+# plt.show()
 
 
 
@@ -285,6 +286,6 @@ plt.show()
 
 # plt.xlabel("Pincipal Component 1")
 # plt.ylabel("Pricipal Component 2")
-# plt.title("Biplot of 2 Pricipal Components for Mortgage Dataset")
+# plt.title("Clustered the data on 6 Principal Components, Reduced to only 2 for Visualization Here")
 # plt.grid(alpha=.4)
 # plt.show()
