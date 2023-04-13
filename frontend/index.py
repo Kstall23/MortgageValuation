@@ -48,7 +48,12 @@ def train():
     trainingModel.trainingClustersDriver()
     return redirect('/')
 
-# Loading Simulation
+# Loading Simulation for Training
+@app.get('/load')
+def loadTraining():
+    return render_template('trainloader.html')
+
+# Loading Simulation for Prediction
 @app.get('/<file_name>/load')
 def loadMortgage(file_name):
     return render_template('loader.html', file_name=file_name)

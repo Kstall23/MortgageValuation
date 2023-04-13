@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capstone Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/loader.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+    <script>
+      function navigate() {
+          window.location.href = '/';  // redirect when done!
+      }
+      fetch('train').then(navigate); // delay then navigate
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="loader"></div>
+    </div>
+    <div class="content2">
+        <div class="marquee4">Reading Training Data</div>
+        <div class="marquee5">Normalizing Data</div>
+        <div class="marquee6">Generating Clusters</div>
+        <div class="marquee7">Updating Model</div>
+        <div class="marquee8">Please Wait</div>
+    </div>
+</body>
+</html>

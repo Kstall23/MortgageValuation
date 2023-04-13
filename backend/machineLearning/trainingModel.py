@@ -121,6 +121,7 @@ def trainingClustersDriver():
     # Push these files to the 'database'
     msg = datetime.now().strftime("%d-%m-%y %H:%M") + " Cluster Database Update"
     gf.pushRepo(repo, 'ModelOutputFiles/', msg)
+    gf.returnToFront()
     
 # ------------------------------------------
 if __name__ == "__main__":
