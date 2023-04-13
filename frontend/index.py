@@ -5,7 +5,7 @@ import pandas as pd
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
 backend_dir = os.path.join(parent_dir, "backend")
 sys.path.append(backend_dir)
-from machineLearning import demoPrediction
+from machineLearning import predictionModel
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -46,7 +46,7 @@ def loadMortgage(file_name):
 def predict(file_name):
     file_path = "../backend/database/individualFiles/" + file_name
     df = pd.read_csv(file_path)
-    df['PPP'] = demoPrediction.predict(file_name)
+    df['PPP'] = predictionModel.testFromUpload(file_name)
     df.to_csv(file_path)
     return jsonify("Prediction Complete!")
 
