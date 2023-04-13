@@ -120,5 +120,5 @@ def trainingClustersDriver():
     gf.pushRepo(repo, 'ModelOutputFiles/', msg)
     
 # ------------------------------------------
-
-trainingClustersDriver()
+if __name__ == "__main__":
+    trainingClustersDriver()

@@ -1,6 +1,9 @@
-import time
+import time, os, sys
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from machineLearning import predictionModel as pm
 
 def predict(file_name):
-    time.sleep(4)
-    print(file_name)
-    return '$200,000'
+    print("Running prediction on ", file_name, "...")
+    return pm.testOnePointDriver()

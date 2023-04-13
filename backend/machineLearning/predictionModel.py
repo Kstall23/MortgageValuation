@@ -1,18 +1,23 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
-import os
+import os, sys
 
-import PreProcessing as pp
-import GitFunctions as gf
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from machineLearning import PreProcessing as pp
+from machineLearning import GitFunctions as gf
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 import pickle
 
+import warnings
+
 # VARIABLES - found in previous exploratory analysis
-from PreProcessing import NUM_CLUSTERS
-from PreProcessing import NUM_PCS
+from machineLearning.PreProcessing import NUM_CLUSTERS
+from machineLearning.PreProcessing import NUM_PCS
 
 # ------------------------------------------------
 
@@ -119,7 +124,7 @@ def provideSuggestion(point, repo_dir, kmeans, fullPoint):
 
 def testOnePointDriver():
 
-    print("Hey look, maybe someday this will provide a prediction point.")
+    #print("Hey look, maybe someday this will provide a prediction point.")
 
     # set up repo, load in the cluster data
     repo, repo_dir, ss, pca, kmeans = getClusterData()
@@ -133,9 +138,12 @@ def testOnePointDriver():
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
     suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, kmeans, fullPoint)
 
-    print(suggestionNumber)
-    print(delinq, appr, depr)
+    print("Suggested price: ", str(suggestionNumber))
+    print("Flags: ", delinq, appr, depr)
+
+    gf.returnToFront()
+    return suggestionNumber
 
 # ------------------------------------------------
-
-testOnePointDriver()
+if __name__ == "__main__":
+    testOnePointDriver()

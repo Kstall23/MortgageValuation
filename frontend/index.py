@@ -2,8 +2,10 @@ import os, re, sys
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
 
-sys.path.append(os.path.abspath(os.pardir) + '/backend/machineLearning')
-import demoPrediction
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+backend_dir = os.path.join(parent_dir, "backend")
+sys.path.append(backend_dir)
+from machineLearning import demoPrediction
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
