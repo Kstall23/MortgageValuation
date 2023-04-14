@@ -1,2 +1,2 @@
 ,Year,MonthlyIncome,UPBatAcquisition,LTVRatio,BorrowerCount,InterestRate,OriginationValue,HousingExpenseToIncome,TotalDebtToIncome,B1CreditScore,B2CreditScore,Performance,PropertyValue,CurrentPropertyValue,ValueChange,Price
-62,2021,4662,253000,37,2,3,253000,38.77,42.52,4,5,Current,683783.7838,649700,-4.984585,253000
+62,2021,4662,253000,37,2,3,253000,38.77,42.52,4,5,Delinquent,683783.7838,649700,-4.984585,253000
