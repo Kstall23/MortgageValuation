@@ -14,6 +14,7 @@ import pickle
 # VARIABLES - found in previous exploratory analysis
 from PreProcessing import NUM_CLUSTERS
 from PreProcessing import NUM_PCS
+from PreProcessing import NUM_NEIGHBORS
 
 # ------------------------------------------------
 
@@ -57,7 +58,7 @@ def getTestPoint(repo_dir):
     =================================================
     '''
     # ==LOAD== the test point from somewhere
-    input_file_name = "TestPoint1.csv"
+    input_file_name = "TestPoint5.csv"
     fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore', 'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
     fullPoint = gf.readData(repo_dir, input_file_name, fullColumns)     # load the data point into a dataframe
 
@@ -103,7 +104,7 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
     pca_cluster_data = pca.transform(std_cluster_data)
     
     # Then create a new knn object for finding the nearest neighbors
-    knn = NearestNeighbors(n_neighbors=5)
+    knn = NearestNeighbors(n_neighbors=NUM_NEIGHBORS)
     knn = knn.fit(pca_cluster_data)                     # fit the object with the 'training data'
     distances, [indices] = knn.kneighbors(point)        # find the nearest points by passing in the 'test data point'
 
@@ -120,10 +121,10 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
     elif fullPoint['Performance'] == "Delinquent":
         delinq = True
 
-    if fullPoint['ValueChange'] >= 25:            # flagging if value has appreciated by at least 25%
+    if fullPoint['ValueChange'] >= 20:            # flagging if value has appreciated by at least 25%
         appr = True
         depr = False
-    elif fullPoint['ValueChange'] <= -25:         # flagging if value has depreciated by at least 25%
+    elif fullPoint['ValueChange'] <= -20:         # flagging if value has depreciated by at least 25%
         depr = True
         appr = False
     else:
@@ -150,6 +151,7 @@ def testOnePointDriver():
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
     suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
 
+    print(fullPoint)
     print(suggestionNumber)
     print(delinq, appr, depr)
 

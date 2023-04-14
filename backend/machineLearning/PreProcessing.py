@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 # NUM_CLUSTERS = 8
 NUM_CLUSTERS = 30
 NUM_PCS = 6
+NUM_NEIGHBORS = 5
 
 ''' ============================================================= '''
 ''' === Functions for handling some preprocessing of the data === '''
