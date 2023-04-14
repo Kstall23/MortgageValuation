@@ -8,6 +8,10 @@
 </head>
 <body>
     <div class="listing">
+        <h1>Retrain Model</h1>
+        <a href="{{ url_for('train') }}" class="button retrain">Retrain Model</a>
+    </div>
+    <div class="listing">
         <h1>Upload your CSV file</h1>
         <form method="POST" action="" enctype="multipart/form-data">
           <p><input type="file" name="file" class="button" id="file"></p>

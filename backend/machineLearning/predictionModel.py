@@ -188,7 +188,7 @@ def testFromUpload(file_name):
     print("Flags: ", delinq, appr, depr)
 
     gf.returnToFront()
-    return suggestionNumber
+    return suggestionNumber, delinq, appr, depr
 
 # ------------------------------------------------
 if __name__ == "__main__":
