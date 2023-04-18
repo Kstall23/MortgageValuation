@@ -44,7 +44,6 @@ def uploadFiles():
 #Train Model
 @app.get('/train')
 def train():
-    print("Training model...")
     trainingModel.trainingClustersDriver()
     return redirect('/')
 
@@ -62,7 +61,7 @@ def loadMortgage(file_name):
 # Generate Predicted Value
 @app.get('/<file_name>/predict')
 def predict(file_name):
-    file_path = FILES_PATH + file_name
+    file_path = FILES_PATH + '/' + file_name
     df = pd.read_csv(file_path)
     df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
     df.to_csv(file_path)
@@ -72,7 +71,9 @@ def predict(file_name):
 # View Specified Mortgage
 @app.get('/<file_name>')
 def mortgageDetails(file_name):
-    file_path = FILES_PATH + file_name
+    file_path = FILES_PATH + '/' + file_name
+    print("My Working Directory on Upload:" + os.getcwd())
+    print("Searching in..." + file_path)
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
     for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:

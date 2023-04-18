@@ -3,7 +3,6 @@ import pandas as pd
 from datetime import datetime
 import os, sys
 
-print("My Working Directory: ", os.getcwd())
 backend_dir = os.path.join(os.getcwd(), "backend/machineLearning")
 sys.path.append(backend_dir)
 import PreProcessing as pp

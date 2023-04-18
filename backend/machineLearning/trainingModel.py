@@ -4,7 +4,6 @@ from datetime import datetime
 import os, sys
 import pickle
 
-print("My Working Directory: ", os.getcwd())
 backend_dir = os.path.join(os.getcwd(), "backend/machineLearning")
 sys.path.append(backend_dir)
 import PreProcessing as pp
@@ -121,7 +120,7 @@ def trainingClustersDriver():
     # Push these files to the 'database'
     msg = datetime.now().strftime("%d-%m-%y %H:%M") + " Cluster Database Update"
     gf.pushRepo(repo, 'ModelOutputFiles/', msg)
-    gf.returnToFront()
+    os.chdir('MortgageValuation')
     
 # ------------------------------------------
 if __name__ == "__main__":

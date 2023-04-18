@@ -3,35 +3,13 @@ import git
 from git import Repo
 import os
 
-MY_ROOT_PATH = '/Users/laurenhelbling/Documents'
 # ---------------------------------------------------------------
 # Check that we are in the MortgageValuation directory and change if not
 def checkDirectory():
-    directory_path = find_directory('MortgageValuation', MY_ROOT_PATH)
-    if directory_path is not None:
-        os.chdir(directory_path)
-    else:
-        exit("ERROR ::::: Could not find MortgageValuation directory!!")
-
-def find_directory(directory_name, starting_directory):
-    """
-    Recursively search for a directory by name within a starting directory and its subdirectories.
-    """
-    for filename in os.listdir(starting_directory):
-        full_path = os.path.join(starting_directory, filename)
-        if os.path.isdir(full_path):
-            if filename == directory_name:
-                return os.path.abspath(full_path)
-            else:
-                subdirectory = find_directory(directory_name, full_path)
-                if subdirectory is not None:
-                    return subdirectory
-    return None
-
-def returnToFront():
-    directory_path = find_directory('frontend', '/Users/laurenhelbling/Documents')
-    if directory_path is not None:
-        os.chdir(directory_path)
+    current_dir = os.getcwd()
+    parts = current_dir.split("/")
+    if parts[-1] != "MortgageValuation":
+        exit("ERROR ::::: Code is not running in the MortgageValuation repository directory!!")
 
 # ---------------------------------------------------------------
 
