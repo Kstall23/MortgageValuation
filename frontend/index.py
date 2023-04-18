@@ -2,16 +2,16 @@ import os, re, sys
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
 
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
-backend_dir = os.path.join(parent_dir, "backend")
+print("My Working Directory: ", os.getcwd())
+backend_dir = os.path.join(os.getcwd(), "backend/machineLearning")
 sys.path.append(backend_dir)
-from machineLearning import predictionModel
-from machineLearning import trainingModel
+import predictionModel
+import trainingModel
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.secret_key = "super secret key"
-FILES_PATH = '../backend/database/individualFiles'
+FILES_PATH = 'backend/database/individualFiles'
 
 
 # Home Page
@@ -33,7 +33,7 @@ def uploadFiles():
     pattern = re.compile(r'.*\.csv$')
     uploaded_file = request.files['file']
     if pattern.match(uploaded_file.filename):
-        file_path = os.path.join('../backend/database/individualFiles', uploaded_file.filename)
+        file_path = os.path.join(FILES_PATH, uploaded_file.filename)
         uploaded_file.save(file_path)
     else:
         flash("Please select a valid csv file before submitting.")
@@ -62,7 +62,7 @@ def loadMortgage(file_name):
 # Generate Predicted Value
 @app.get('/<file_name>/predict')
 def predict(file_name):
-    file_path = "../backend/database/individualFiles/" + file_name
+    file_path = FILES_PATH + file_name
     df = pd.read_csv(file_path)
     df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
     df.to_csv(file_path)
@@ -72,7 +72,7 @@ def predict(file_name):
 # View Specified Mortgage
 @app.get('/<file_name>')
 def mortgageDetails(file_name):
-    file_path = "../backend/database/individualFiles/" + file_name
+    file_path = FILES_PATH + file_name
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
     for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:

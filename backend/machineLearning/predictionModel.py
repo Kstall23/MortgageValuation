@@ -3,11 +3,11 @@ import pandas as pd
 from datetime import datetime
 import os, sys
 
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
-backend_dir = os.path.join(parent_dir, "backend")
+print("My Working Directory: ", os.getcwd())
+backend_dir = os.path.join(os.getcwd(), "backend/machineLearning")
 sys.path.append(backend_dir)
-from machineLearning import PreProcessing as pp
-from machineLearning import GitFunctions as gf
+import PreProcessing as pp
+import GitFunctions as gf
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
@@ -17,8 +17,8 @@ import pickle
 import warnings
 
 # VARIABLES - found in previous exploratory analysis
-from machineLearning.PreProcessing import NUM_CLUSTERS
-from machineLearning.PreProcessing import NUM_PCS
+from PreProcessing import NUM_CLUSTERS
+from PreProcessing import NUM_PCS
 FILES_PATH = 'MortgageValuation/backend/database/individualFiles'
 
 # ------------------------------------------------
