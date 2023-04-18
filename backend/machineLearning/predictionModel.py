@@ -108,7 +108,7 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
     pca_cluster_data = pca.transform(std_cluster_data)
     
     # Then create a new knn object for finding the nearest neighbors
-    knn = NearestNeighbors(n_neighbors=5)
+    knn = NearestNeighbors(n_neighbors=7)
     knn = knn.fit(pca_cluster_data)                     # fit the object with the 'training data'
     distances, [indices] = knn.kneighbors(point)        # find the nearest points by passing in the 'test data point'
 
