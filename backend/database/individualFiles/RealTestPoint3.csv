@@ -1,2 +1,2 @@
-,Year,MonthlyIncome,UPBatAcquisition,LTVRatio,BorrowerCount,InterestRate,OriginationValue,HousingExpenseToIncome,TotalDebtToIncome,B1CreditScore,B2CreditScore,Performance,PropertyValue,CurrentPropertyValue,ValueChange,Price
-82009,2020,10224,190000,67,2,2.875,190000,13.05,13.05,5,5,Current,283582.0896,290000,2.26315789,190000
+,Unnamed: 0,Year,MonthlyIncome,UPBatAcquisition,LTVRatio,BorrowerCount,InterestRate,OriginationValue,HousingExpenseToIncome,TotalDebtToIncome,B1CreditScore,B2CreditScore,Performance,PropertyValue,CurrentPropertyValue,ValueChange,Price,PPP,delinq,appr,depr
+0,82009,2020,10224,190000,67,2,2.875,190000,13.05,13.05,5,5,Current,283582.0896,290000,2.26315789,190000,181480.0,False,False,False
