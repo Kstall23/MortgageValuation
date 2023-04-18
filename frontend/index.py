@@ -2,7 +2,6 @@ import os, re, sys
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
 
-print("My Working Directory: ", os.getcwd())
 backend_dir = os.path.join(os.getcwd(), "backend/machineLearning")
 sys.path.append(backend_dir)
 import predictionModel
@@ -77,6 +76,8 @@ def mortgageDetails(file_name):
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
     for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
+        if 'PPP' not in data.keys():
+            return redirect('/' + file_name + '/load')
         if not isinstance(data[item], str):
             data[item] = "${:,.2f}".format(data[item])
     for item in ['InterestRate', 'LTVRatio']:
