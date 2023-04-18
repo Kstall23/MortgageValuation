@@ -168,13 +168,12 @@ def testFromUpload(file_name):
     repo, repo_dir, ss, pca, kmeans = getClusterData()
 
     # load in new test point
-    print("...Reading an input file from upload...")
+    print("...Reading an input file from file upload...")
     fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate',
                    'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore',
                    'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
 
-    #TODO: get file from filename and FILES_PATH
-    file_path = FILES_PATH + "/" + file_name
+    file_path = os.path.join(FILES_PATH, file_name)
     fullPoint = pd.read_csv(file_path, sep=',', names=fullColumns, header=0)
 
     # preprocess the test point using data manipulation objects from training data
@@ -185,8 +184,7 @@ def testFromUpload(file_name):
 
     print("Suggested price: ", str(suggestionNumber))
     print("Flags: ", delinq, appr, depr)
-
-    gf.returnToFront()
+    os.chdir('MortgageValuation')
     return suggestionNumber, delinq, appr, depr
 
 # ------------------------------------------------
