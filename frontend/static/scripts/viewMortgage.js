@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     else if(i==1) {
                         if (flag_values[i].textContent.includes("True")) {
                             checkIcon.src = "/static/icons/check.png";
-                            flag_lines[i].textContent = "This mortgage is appreciating in value!";
+                            flag_lines[i].textContent = "This mortgage has significantly appreciated in value!";
                         } else {
                             checkIcon.src = "/static/icons/x-mark.png";
-                            flag_lines[i].textContent = "This mortgage is not appreciating in value.";
+                            flag_lines[i].textContent = "This mortgage has not significantly appreciated in value.";
                         }
                     }
                     else {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             flag_lines[i].textContent = "Warning: this mortgage has significantly depreciated in value!";
                         } else {
                             checkIcon.src = "/static/icons/check.png";
-                            flag_lines[i].textContent = "This mortgage is not significantly depreciated in value.";
+                            flag_lines[i].textContent = "This mortgage has not significantly depreciated in value.";
                         }
                     }
                 }

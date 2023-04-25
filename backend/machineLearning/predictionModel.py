@@ -18,7 +18,7 @@ import warnings
 # VARIABLES - found in previous exploratory analysis
 from PreProcessing import NUM_CLUSTERS
 from PreProcessing import NUM_PCS
-FILES_PATH = 'MortgageValuation/backend/database/individualFiles'
+FILES_PATH = 'MortgageValuation/backend/database/uploadedFiles'
 
 # ------------------------------------------------
 
@@ -158,7 +158,6 @@ def testOnePointDriver():
     print("Suggested price: ", str(suggestionNumber))
     print("Flags: ", delinq, appr, depr)
 
-    gf.returnToFront()
     return suggestionNumber
 
 def testFromUpload(file_name):
@@ -169,12 +168,9 @@ def testFromUpload(file_name):
 
     # load in new test point
     print("...Reading an input file from file upload...")
-    fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate',
-                   'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore',
-                   'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
 
     file_path = os.path.join(FILES_PATH, file_name)
-    fullPoint = pd.read_csv(file_path, sep=',', names=fullColumns, header=0)
+    fullPoint = pd.read_csv(file_path, sep=',', header=0)
 
     # preprocess the test point using data manipulation objects from training data
     point = testPointProcessing(fullPoint, ss, pca)

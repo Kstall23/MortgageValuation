@@ -103,7 +103,6 @@ span{
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    cursor: pointer;
 }
 
 #pppt{
@@ -136,6 +135,7 @@ span{
 }
 #question{
     position: relative;
+    cursor: pointer;
     top: -55px;
     left: 88%;
     width: 20px;
