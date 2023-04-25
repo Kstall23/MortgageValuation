@@ -10,12 +10,10 @@
           console.log("navigating to..." + window.location.href.split('/load')[0])
           window.location.href = window.location.href.split('/load')[0];  // redirect when done!
       }
-      function runPrediction(){
-          fetch('predict').then(navigate); // delay then navigate
-      }
+      fetch('predict').then(navigate); // delay then navigate
     </script>
 </head>
-<body onload="runPrediction()">
+<body>
     <div class="content">
         <div class="loader"></div>
     </div>

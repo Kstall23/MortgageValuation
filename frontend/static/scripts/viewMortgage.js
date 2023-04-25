@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     else {
                         if (flag_values[i].textContent.includes("True")) {
                             checkIcon.src = "/static/icons/x-mark.png";
-                            flag_lines[i].textContent = "Warning: this mortgage is depreciating in value!";
+                            flag_lines[i].textContent = "Warning: this mortgage has significantly depreciated in value!";
                         } else {
                             checkIcon.src = "/static/icons/check.png";
-                            flag_lines[i].textContent = "This mortgage is not depreciating in value.";
+                            flag_lines[i].textContent = "This mortgage is not significantly depreciated in value.";
                         }
                     }
                 }

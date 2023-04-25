@@ -70,6 +70,8 @@ def loadMortgage(loanID):
 def predict(loanID):
     file_name = loanID + '.csv'
     file_path = os.path.join(FILES_PATH, file_name)
+    print("Manually overwriting to MortageValuation for now...")
+    os.chdir('MortgageValuation')
     df = pd.read_csv(file_path)
     df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
     df['loanID'] = loanID
@@ -82,6 +84,7 @@ def predict(loanID):
 def mortgageDetails(loanID):
     file_name = loanID + '.csv'
     file_path = os.path.join(FILES_PATH, file_name)
+    print(os.getcwd())
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
     for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
@@ -94,9 +97,8 @@ def mortgageDetails(loanID):
             data[item] = "{:.2%}".format(data[item] / 100)
     return render_template('mortgageDetails.html', data=data, file_name=file_name)
 
-
 # Delete Specified File
-@app.route("/delete/<loanID>")
+@app.route("/<loanID>/delete")
 def delete_file(loanID):
     file_name = loanID + '.csv'
     os.remove(os.path.join(FILES_PATH, file_name))
