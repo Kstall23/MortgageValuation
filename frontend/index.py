@@ -83,11 +83,7 @@ def mortgageDetails(file_name):
     for item in ['InterestRate', 'LTVRatio']:
         if not isinstance(data[item], str):
             data[item] = "{:.2%}".format(data[item] / 100)
-    if data['delinq'] or data['depr']:
-        ppp = "Not Recommended"
-    else:
-        ppp = "Recommended"
-    return render_template('mortgageDetails.html', data=data, recommendation=ppp, file_name=file_name)
+    return render_template('mortgageDetails.html', data=data, file_name=file_name)
 
 
 # Delete Specified File

@@ -173,3 +173,7 @@ a:hover, img:hover{
     padding: 10px;
     font-size: 10pt;
 }
+
+.invisible{
+    display: none;
+}

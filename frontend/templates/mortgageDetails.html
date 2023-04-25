@@ -8,6 +8,9 @@
         <script src="{{ url_for('static', filename='scripts/viewMortgage.js') }}"></script>
     </head>
     <body>
+        <label class="invisible" id="delinq">{{ data['delinq'] }}</label>
+        <label class="invisible" id="appr">{{ data['appr'] }}</label>
+        <label class="invisible" id="depr">{{ data['depr'] }}</label>
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
         <h1>Mortgage Details</h1>
         <div class="listing">
@@ -60,7 +63,7 @@
             </span>
         </div>
         <div class="listing" id="explore">
-            <h2>Why is this investment <span id="recommend">{{recommendation.lower()}}</span> by Brightvine?</h2>
+            <h2>Additional Considerations</h2>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
                 <p class="minor_line">Delinquency: {{ data['delinq'] }}</p>
