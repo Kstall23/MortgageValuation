@@ -14,7 +14,7 @@
         <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
         <h1>Mortgage Details</h1>
         <div class="listing">
-            <h3>Loan Number: <span id="green">5A18329F7</span></h3>
+            <h3>Loan Number: <span id="green">{{ data['loanID'] }}</span></h3>
             <span>
                 <div class="item">
                     <h4>Price</h4>
