@@ -70,7 +70,7 @@ def loadMortgage(loanID):
 def predict(loanID):
     time.sleep(2)
     file_name = loanID + '.csv'
-    file_path = os.path.join(FILES_PATH, file_name)git
+    file_path = os.path.join(FILES_PATH, file_name)
     df = pd.read_csv(file_path)
     print("Current directory" + os.getcwd() + " reading from " + file_path)
     df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
