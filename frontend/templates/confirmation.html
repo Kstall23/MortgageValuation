@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capstone Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/loader.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+</head>
+<body>
+    <a href="{{url_for('index')}}" class="button return">Return to File Upload</a>
+    <div class="content">
+        <img src={{url_for('static',filename='icons/confirmed.png')}} class="confirmed">
+    </div>
+    <div class="content2">
+        <div>Model Successfully Retrained</div>
+    </div>
+</body>
+</html>

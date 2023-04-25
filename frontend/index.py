@@ -53,6 +53,11 @@ def loadTraining():
     return render_template('trainloader.html')
 
 
+@app.route('/confirmation')
+def confirmation():
+    return render_template('confirmation.html')
+
+
 # Loading Simulation for Prediction
 @app.get('/<file_name>/load')
 def loadMortgage(file_name):

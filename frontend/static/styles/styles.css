@@ -125,10 +125,15 @@ span{
     margin: auto 0px;
 }
 
-.check:hover{
+.check:hover, .confirmed:hover{
     transform: none;
 }
 
+.confirmed{
+    width: 100px;
+    height: 100px;
+    margin: auto 0px;
+}
 #question{
     position: relative;
     top: -55px;
