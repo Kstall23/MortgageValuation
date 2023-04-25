@@ -125,10 +125,10 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
     elif fullPoint['Performance'] == "Delinquent":
         delinq = True
 
-    if fullPoint['ValueChange'] >= 25:            # flagging if value has appreciated by at least 25%
+    if fullPoint['ValueChange'] >= 20:            # flagging if value has appreciated by at least 25%
         appr = True
         depr = False
-    elif fullPoint['ValueChange'] <= -25:         # flagging if value has depreciated by at least 25%
+    elif fullPoint['ValueChange'] <= -20:         # flagging if value has depreciated by at least 25%
         depr = True
         appr = False
     else:

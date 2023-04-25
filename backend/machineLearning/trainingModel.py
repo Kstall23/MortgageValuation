@@ -52,15 +52,16 @@ def getData():
 
 def getClusters(data):
     # Reduce Dimensionality with PCA
+    print("\n...Performing PCA...")
     pca = PCA(n_components = NUM_PCS)
     pca_data = pca.fit_transform(data)
-    print("\n...Performing PCA...")
-    print(".....Data reduced to {} attributes".format(pca_data.shape[1]))
+    print(".....Data reduced to {} attributes.....".format(pca_data.shape[1]))
 
-    # Use KMeans to cluster the PCA-ed data
+    # Use KMeans to cluster the PCA-ed 
+    print("\n...Performing K-Means Clustering...")
     kmeans = KMeans(n_clusters = NUM_CLUSTERS, n_init = 10)
     clusters = kmeans.fit_predict(pca_data)
-    print("\n...Data grouped into {} clusters using the K-Means algorithm...".format(NUM_CLUSTERS))
+    print(".....Data grouped into {} clusters using the K-Means algorithm.....".format(NUM_CLUSTERS))
 
     return kmeans.cluster_centers_, clusters, pca, kmeans
 

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             flag_lines[i].textContent = "This property has significantly depreciated in value.";
                         }
                         else{
-                            checkIcon.src = "/static/icons/check.png";
+                            checkIcon.src = "/static/icons/line.png";
                             flag_lines[i].textContent = "This property has not significantly changed in value.";
                         }
                     }
