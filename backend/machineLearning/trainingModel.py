@@ -40,6 +40,8 @@ def getData():
 
     columnsForClustering = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore']
     reduced_data = no_outliers_data[columnsForClustering]
+    print("\n....Reduce dataset to columns relevant for clustering....")
+    print(".......{} data instances with {} attributes....".format(reduced_data.shape[0], reduced_data.shape[1]))
 
     std_data, columns, ss = pp.normalize(reduced_data, columnsForClustering)
     # trainData, testData = pp.create_folds(std_data)
@@ -52,16 +54,22 @@ def getClusters(data):
     # Reduce Dimensionality with PCA
     pca = PCA(n_components = NUM_PCS)
     pca_data = pca.fit_transform(data)
+    print("\n...Performing PCA...")
+    print(".....Data reduced to {} attributes".format(pca_data.shape[1]))
 
     # Use KMeans to cluster the PCA-ed data
     kmeans = KMeans(n_clusters = NUM_CLUSTERS, n_init = 10)
     clusters = kmeans.fit_predict(pca_data)
+    print("\n...Data grouped into {} clusters using the K-Means algorithm...".format(NUM_CLUSTERS))
 
     return kmeans.cluster_centers_, clusters, pca, kmeans
 
 # ------------------------------------------------
 
 def storeClusterData(repo_dir, std_centroids, columns, cluster_labels, fullData, ss, pca, kmeans):
+
+    print("\n\n...Writing cluster data and data processing objects to files in the remote database repository...")
+
     # all file names for the three database files and data manipulation objects
     file_names = ["StandardizedCentroids.csv", "ReadableCentroids.csv", "ClusterLabels.csv", "ss.pkl", "pca.pkl", "kmeans.pkl"]
     
@@ -104,11 +112,12 @@ def storeClusterData(repo_dir, std_centroids, columns, cluster_labels, fullData,
 
 def trainingClustersDriver():
 
-    print("Hey look, this loads data and decides how to cluster it.")
+    print("\n==== Preprocessing Data ====")
 
     # set up repo, load in the data, run preprocessing
     no_outliers_data, data, columns, ss, repo, repo_dir = getData()
 
+    print("\n\n==== Training/Clustering ====")
     # Cluster the training data
     std_centroids, cluster_labels, pca, kmeans = getClusters(data)
 

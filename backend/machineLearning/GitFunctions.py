@@ -43,6 +43,7 @@ def getRepo():
 def readData(repo_dir, input_file_name, columns):
     data = pd.read_csv(os.path.join(repo_dir, input_file_name), sep=',', names=columns, header=0)
     print("...Reading an input file from remote repo...")
+    print("....{} data instances with {} attributes....".format(data.shape[0], data.shape[1]))
     return data
 
 

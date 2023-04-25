@@ -17,21 +17,21 @@ NUM_PCS = 6
 ''' ============================================================= '''
 
 def removeMissing(data):
-    print("....Dropping rows with Missing Values....")
+    print("\n....Dropping rows with Missing Values....")
     start = len(data)
     data = data.dropna()
     data = data[data['HousingExpenseToIncome'] != 999]
     data = data[data['TotalDebtToIncome'] != 999]
     end = len(data)
     if start - end == 0:
-        print(".......No missing values, no rows dropped\n")
+        print(".......No missing values, no rows dropped")
     else:
-        print("......." + str(start-end) + " rows dropped with at least one missing value\n")
+        print("......." + str(start-end) + " rows dropped with at least one missing value")
     return data
 
 
 def removeExtremeOutliers(data, columns):
-    print("....Removing extreme outliers....")
+    print("\n....Removing extreme outliers....")
     print(".......Dropping rows with values outside the whiskers of length 3 x IQR\n")
     
     # gather quartile limits for each column
@@ -49,14 +49,15 @@ def removeExtremeOutliers(data, columns):
         print("+++ Outliers removed from " + col + " column: " + str(thisStart - end))
         thisStart = end
 
-    print("\n" + str(start-end) + " rows with outliers dropped from the dataset\n")
+    print("\n" + str(start-end) + " rows with outliers dropped from the dataset")
+    print("...{} rows remaining...".format(end))
 
     return data
 
 
 def normalize(data, columns):
-    print("....Standardizing the columns of data....")
-    print(".......Setting each column's values to have mean of 0 and std of 1\n")
+    print("\n....Standardizing the columns of data....")
+    print(".......Setting each column's values to have mean of 0 and std of 1")
     years = data['Year']
     data = data.drop(columns=['Year'])
     columns.remove('Year')

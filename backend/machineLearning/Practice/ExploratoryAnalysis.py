@@ -45,16 +45,16 @@ NUM_PCs = 6
 
 ''' # Reduce Dimensionality, Apply Clustering, Reduce Further in order to Visualize '''
 # Use PCA to reduce dimensionality
-pca = PCA(n_components=NUM_PCs)
-pca_data = pca.fit_transform(data)
+# pca = PCA(n_components=NUM_PCs)
+# pca_data = pca.fit_transform(data)
 
-# Use KMeans to cluster the PCA-ed data
-kmeans = KMeans(n_clusters = NUM_CLUSTERS, n_init = 10)
-clusters = kmeans.fit_predict(pca_data)
+# # Use KMeans to cluster the PCA-ed data
+# kmeans = KMeans(n_clusters = NUM_CLUSTERS, n_init = 10)
+# clusters = kmeans.fit_predict(pca_data)
 
-# Reduce to 2 components this time to graph it
-pca2 = PCA(n_components=2)
-pca_data2 = pca2.fit_transform(data)
+# # Reduce to 2 components this time to graph it
+# pca2 = PCA(n_components=2)
+# pca_data2 = pca2.fit_transform(data)
 
 
 ''' # Look at the cluster centroids, do they mean anything? '''
@@ -250,7 +250,7 @@ pca_data2 = pca2.fit_transform(data)
 # exp_var_pca = pca.explained_variance_ratio_         # this shows variance explained by each component
 # cum_sum = np.cumsum(exp_var_pca)                    # this shows the cumulative variance explained by each component
 
-# graph it
+# # graph it
 # plt.step(range(1,len(cum_sum)+1), cum_sum, where='mid', label='Cumulative Explained Variance')
 # plt.ylabel('Explained Variance Ratio')
 # plt.xlabel('Number of Principal Components')
