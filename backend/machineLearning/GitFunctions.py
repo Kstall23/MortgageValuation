@@ -7,8 +7,8 @@ import os
 # Check that we are in the MortgageValuation directory and change if not
 def checkDirectory():
     current_dir = os.getcwd()
-    parts = current_dir.split("/")
-    if parts[-1] != "MortgageValuation":
+    head_tail = os.path.split(current_dir)
+    if head_tail[1] != "MortgageValuation":
         exit("ERROR ::::: Code is not running in the MortgageValuation repository directory!!")
 
 # ---------------------------------------------------------------
