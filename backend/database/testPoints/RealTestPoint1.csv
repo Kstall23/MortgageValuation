@@ -1,2 +1,2 @@
-,Unnamed: 0,Year,MonthlyIncome,UPBatAcquisition,LTVRatio,BorrowerCount,InterestRate,OriginationValue,HousingExpenseToIncome,TotalDebtToIncome,B1CreditScore,B2CreditScore,Performance,PropertyValue,CurrentPropertyValue,ValueChange,Price,PPP,delinq,appr,depr
-0,28,2021,6893,66500,47,2,2.375,66500,11.89,31.34,4,3,Current,141489.3617,110000,-22.255639,66500,65690.0,False,False,False
+id,Year,MonthlyIncome,UPBatAcquisition,LTVRatio,BorrowerCount,InterestRate,OriginationValue,HousingExpenseToIncome,TotalDebtToIncome,B1CreditScore,B2CreditScore,Performance,PropertyValue,CurrentPropertyValue,ValueChange,Price
+28,2021,6893,66500,47,2,2.375,66500,11.89,31.34,4,3,Current,141489.3617,110000,-22.255639,66500
