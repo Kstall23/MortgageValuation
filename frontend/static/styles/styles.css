@@ -31,10 +31,17 @@ body{
     margin: 4px 2px;
 }
 
-.return{
+.return, .repredict{
     padding: 16px 32px;
     margin: 40px 0px;
     max-width: 20%;
+}
+
+.repredict{
+    color: #005458;
+    background-color: #93e6b2;
+    display: inline;
+    float: right;
 }
 
 h1, h2{
@@ -114,11 +121,7 @@ span{
     color: white;
 }
 
-#explore{
-    display: none;
-}
-
-.check, #question{
+.check{
     width: 25px;
     height: 25px;
     margin: auto 0px;
@@ -132,14 +135,6 @@ span{
     width: 100px;
     height: 100px;
     margin: auto 0px;
-}
-#question{
-    position: relative;
-    cursor: pointer;
-    top: -55px;
-    left: 88%;
-    width: 20px;
-    height: 20px;
 }
 
 .default{
@@ -162,7 +157,7 @@ a:hover, img:hover{
     margin-bottom: 10px;
 }
 
-#documents{
+.inline_link{
     color: #1daf97;
     text-decoration: underline;
     margin: 0px ;

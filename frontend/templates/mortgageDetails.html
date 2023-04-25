@@ -35,7 +35,6 @@
                 <div class="item">
                     <h4>Brightvine Predicted Value</h4>
                     <p  id="pppt" class="bubble-box">{{data['PPP']}}</p>
-                    <img src={{url_for('static',filename='icons/question.png')}} id="question">
                 </div>
             </span>
             <span>
@@ -58,23 +57,28 @@
             </span>
             <span>
                 <div class="item">
-                    <p><a id="documents">Documents</a></p>
+                    <p><a class="inline_link">Documents</a></p>
                 </div>
             </span>
         </div>
         <div class="listing" id="explore">
+            <h2>Neighbor Information</h2>
+            <div class="line">
+                <p>Similar mortgages are priced between {{ data['neighbor_min'] }} and {{ data['neighbor_max'] }}.</p>
+            </div>
             <h2>Additional Considerations</h2>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
-                <p class="minor_line">Delinquency: {{ data['delinq'] }}</p>
+                <p class="minor_line"></p>
             </div>
             <div class="line">
                 <img src={{url_for('static',filename='icons/check.png')}} class="check">
-                <p class="minor_line">Appreciating in Value: {{ data['appr'] }}</p>
+                <p class="minor_line"></p>
             </div>
+            <h2>Prediction Status</h2>
             <div class="line">
-                <img src={{url_for('static',filename='icons/x-mark.png')}} class="check">
-                <p class="minor_line">Depreciating in Value: {{ data['depr'] }}</p>
+                <p>Last updated: {{ data['last_updated'] }}</p>
+                <p><a href="{{url_for('loadMortgage', loanID=data['loanID'])}}" class="inline_link">Update Prediction</a></p>
             </div>
         </div>
     </body>

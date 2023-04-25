@@ -135,7 +135,7 @@ def provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint):
         appr = False
         depr = False
 
-    return price, delinq, appr, depr
+    return price, delinq, appr, depr, neighbors['Price']
 
 # ------------------------------------------------
 
@@ -153,10 +153,11 @@ def testOnePointDriver():
     point = testPointProcessing(fullPoint, ss, pca)
 
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
-    suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
+    suggestionNumber, delinq, appr, depr, neighbors = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
 
     print("Suggested price: ", str(suggestionNumber))
     print("Flags: ", delinq, appr, depr)
+    print("Neighbors: ", neighbors)
 
     return suggestionNumber
 
@@ -176,12 +177,12 @@ def testFromUpload(file_name):
     point = testPointProcessing(fullPoint, ss, pca)
 
     # provide suggestion - place point in a cluster and draw pricing data from cluster members
-    suggestionNumber, delinq, appr, depr = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
+    suggestionNumber, delinq, appr, depr, neighbors = provideSuggestion(point, repo_dir, ss, pca, kmeans, fullPoint)
 
     print("Suggested price: ", str(suggestionNumber))
     print("Flags: ", delinq, appr, depr)
     os.chdir('MortgageValuation')
-    return suggestionNumber, delinq, appr, depr
+    return suggestionNumber, delinq, appr, depr, neighbors
 
 # ------------------------------------------------
 if __name__ == "__main__":

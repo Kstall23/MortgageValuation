@@ -1,3 +1,4 @@
+import datetime
 import os, re, sys, uuid, time
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
@@ -68,13 +69,15 @@ def loadMortgage(loanID):
 # Generate Predicted Value
 @app.get('/<loanID>/predict')
 def predict(loanID):
-    time.sleep(4)
+    time.sleep(2)
     file_name = loanID + '.csv'
     file_path = os.path.join(FILES_PATH, file_name)
     df = pd.read_csv(file_path)
-    print("Current directory" + os.getcwd() + " reading from " + file_path)
-    df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
+    df['PPP'], df['delinq'], df['appr'], df['depr'], neighbors = predictionModel.testFromUpload(file_name)
     df['loanID'] = loanID
+    df['last_updated'] = time.strftime("%Y-%m-%d %H:%M")
+    df['neighbor_min'] = neighbors.min()
+    df['neighbor_max'] = neighbors.max()
     df.to_csv(file_path)
     return jsonify("Prediction Complete!")
 
@@ -86,7 +89,8 @@ def mortgageDetails(loanID):
     file_path = os.path.join(FILES_PATH, file_name)
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
-    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
+    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue',
+                 'neighbor_min', 'neighbor_max']:
         if 'PPP' not in data.keys():
             return redirect('/' + file_name + '/load')
         if not isinstance(data[item], str):
