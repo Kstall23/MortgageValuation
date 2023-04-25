@@ -1,4 +1,5 @@
-import os, re, sys, uuid
+import datetime
+import os, re, sys, uuid, time
 from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
 import pandas as pd
 
@@ -10,7 +11,7 @@ import trainingModel
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.secret_key = "super secret key"
-FILES_PATH = 'backend/database/individualFiles'
+FILES_PATH = 'backend/database/uploadedFiles'
 
 
 # Home Page
@@ -62,19 +63,21 @@ def confirmation():
 # Loading Simulation for Prediction
 @app.get('/<loanID>/load')
 def loadMortgage(loanID):
-    return render_template('loader.html', file_name=loanID+'.csv')
+    return render_template('loader.html', loanID=loanID)
 
 
 # Generate Predicted Value
 @app.get('/<loanID>/predict')
 def predict(loanID):
+    time.sleep(2)
     file_name = loanID + '.csv'
     file_path = os.path.join(FILES_PATH, file_name)
-    print("Manually overwriting to MortageValuation for now...")
-    os.chdir('MortgageValuation')
     df = pd.read_csv(file_path)
-    df['PPP'], df['delinq'], df['appr'], df['depr'] = predictionModel.testFromUpload(file_name)
+    df['PPP'], df['delinq'], df['appr'], df['depr'], neighbors = predictionModel.testFromUpload(file_name)
     df['loanID'] = loanID
+    df['last_updated'] = time.strftime("%Y-%m-%d %H:%M")
+    df['neighbor_min'] = neighbors.min()
+    df['neighbor_max'] = neighbors.max()
     df.to_csv(file_path)
     return jsonify("Prediction Complete!")
 
@@ -84,10 +87,10 @@ def predict(loanID):
 def mortgageDetails(loanID):
     file_name = loanID + '.csv'
     file_path = os.path.join(FILES_PATH, file_name)
-    print(os.getcwd())
     df = pd.read_csv(file_path)
     data = df.to_dict('records')[0]
-    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue']:
+    for item in ['Price', 'UPBatAcquisition', 'PPP', 'OriginationValue', 'PropertyValue', 'CurrentPropertyValue',
+                 'neighbor_min', 'neighbor_max']:
         if 'PPP' not in data.keys():
             return redirect('/' + file_name + '/load')
         if not isinstance(data[item], str):
