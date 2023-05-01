@@ -54,13 +54,6 @@ def getClusterData():
 
 def getTestPoint(repo_dir):
 
-    '''
-    =================================================
-    == THIS NEEDS TO CHANGE 
-    == Need to figure out how to pull the data point of the page we're viewing in the Mortgage Details
-    == This currently pulls a dummy file from the database repo with one point stored in it
-    =================================================
-    '''
     # ==LOAD== the test point from somewhere
     input_file_name = "TestPoint1.csv"
     fullColumns = ['Year', 'MonthlyIncome', 'UPBatAcquisition', 'LTVRatio', 'BorrowerCount', 'InterestRate', 'OriginationValue', 'HousingExpenseToIncome', 'TotalDebtToIncome', 'B1CreditScore', 'B2CreditScore', 'Performance', 'PropertyValue', 'CurrentPropertyValue', 'ValueChange', 'Price']
